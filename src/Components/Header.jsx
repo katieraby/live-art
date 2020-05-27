@@ -1,11 +1,12 @@
 import React from 'react';
-// import ArtistSignUp from './ArtistSignUp';
-// import UserLogIn from './UserLogIn';
+import { Link } from '@reach/router';
 
 const Header = () => {
   return (
-    <header>
+    <header className="header">
+      <Link to="/artist-log-in">Artist Log In</Link>
       <h1>Live Art</h1>
+      <Link to="/coil-log-in">Supporter Log In</Link>
     </header>
   );
 };
