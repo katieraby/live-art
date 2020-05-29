@@ -5,7 +5,7 @@ const IndividualLiveArt = () => {
   const canvasRef = useRef(null);
 
   const [drawing, setDrawing] = useState(false);
-  const [color, setColor] = useState('hotpink');
+  const [color, setColor] = useState('pink');
   const [cleared, setCleared] = useState(false);
   const [currentAxis, setCurrentAxis] = useState({ currentX: 0, currentY: 0 });
 
@@ -34,16 +34,22 @@ const IndividualLiveArt = () => {
     }
 
     setCurrentAxis({ currentX: e.clientX, currentY: e.clientY });
-    draw(currentAxis.currentX, currentAxis.currentY, e.clientX, e.clientY);
+    draw(
+      currentAxis.currentX,
+      currentAxis.currentY,
+      e.clientX,
+      e.clientY,
+      color
+    );
   };
 
-  function draw(x0, y0, x1, y1) {
+  function draw(x0, y0, x1, y1, color) {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     ctx.beginPath();
     ctx.moveTo(x0, y0);
     ctx.lineTo(x1, y1);
-    ctx.strokeStyle = color;
+    ctx.stokeStyle = color;
     ctx.lineWidth = 2;
     ctx.stroke();
     ctx.closePath();

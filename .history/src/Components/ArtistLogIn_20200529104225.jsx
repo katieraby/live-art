@@ -13,8 +13,6 @@ const ArtistLogIn = () => {
     e.preventDefault();
     console.log(logInDetails, 'apirequest');
     //api get request to check artist exists and provide username to link below
-    //if ok set log in details, navigate to individual artist page
-    //add artist to context array of artists
     setLogInDetails({ username: '', password: '' });
   };
 

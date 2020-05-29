@@ -43,7 +43,7 @@ const IndividualLiveArt = () => {
     ctx.beginPath();
     ctx.moveTo(x0, y0);
     ctx.lineTo(x1, y1);
-    ctx.strokeStyle = color;
+    ctx.stokeStyle = color;
     ctx.lineWidth = 2;
     ctx.stroke();
     ctx.closePath();
