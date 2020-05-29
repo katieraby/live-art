@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Router } from '@reach/router';
+import Header from './Components/Header';
+import ArtistLogIn from './Components/ArtistLogIn';
+import UserLogIn from './Components/UserLogIn';
+import LiveArt from './Components/LiveArt';
+import IndividualLiveArt from './Components/IndividualLiveArt';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Router className="main-content">
+        <LiveArt path="/" />
+        <ArtistLogIn path="/artist-log-in" />
+        <UserLogIn path="/coil-log-in" />
+        <IndividualLiveArt path="/:artist-id" />
+      </Router>
     </div>
   );
 }
