@@ -15,7 +15,7 @@ function App() {
         <LiveArt path="/" />
         <ArtistLogIn path="/artist-log-in" />
         <UserLogIn path="/coil-log-in" />
-        <IndividualLiveArt path="/:artist-id" />
+        <IndividualLiveArt path="/:username" />
       </Router>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ArtistSignUp from './ArtistSignUp';
+import { Link } from '@reach/router';
 
 const ArtistLogIn = () => {
   const [hasAccount, setHasAccount] = useState(true);
@@ -11,7 +12,7 @@ const ArtistLogIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(logInDetails, 'apirequest');
-    //api get request
+    //api get request to check artist exists and provide username to link below
     setLogInDetails({ username: '', password: '' });
   };
 
@@ -41,7 +42,9 @@ const ArtistLogIn = () => {
                 setLogInDetails({ ...logInDetails, password: e.target.value })
               }
             />
-            <button>Log In</button>
+            <button>
+              <Link to={`/${logInDetails.username}`}>Log In</Link>
+            </button>
           </form>
           <button
             onClick={() => {
