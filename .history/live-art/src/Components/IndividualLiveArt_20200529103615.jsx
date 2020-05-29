@@ -1,23 +1,10 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 
 const IndividualLiveArt = () => {
   /*need to use ref as canvas behaves differently in the dom. most dom elements have a value property that you can update directly whereas canvas has a context, which allows us to draw things.  */
   const canvasRef = useRef(null);
 
-  const [locations, setLocations] = useState(
-    JSON.parse(localStorage.getItem('draw-app')) || []
-  );
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, window.innerHeight, window.innerWidth);
-    locations.forEach((location) => draw(ctx, location));
-  });
-
-  useEffect(() => {
-    localStorage.setItem('draw-app', JSON.stringify(locations));
-  });
+  const [locations, setLocations] = useState([]);
 
   /*below creates the hook image ... we will want to do something to make it not a hook and just a line/brush stroke. Would be cool if we could change the actual drawing tool and the colour */
   const HOOK_SVG =
@@ -36,29 +23,19 @@ const IndividualLiveArt = () => {
     ctx.restore();
   }
 
-  function handleCanvasClick(e) {
-    const newLocation = { x: e.clientX, y: e.clientY };
-    setLocations([...locations, newLocation]);
-  }
-
-  function handleClear() {
-    setLocations([]);
-  }
-
-  function handleUndo() {
-    setLocations(locations.slice(0, -1));
-  }
-
   return (
     <div>
-      <button onClick={handleClear}>Clear</button>
-      <button onClick={handleUndo}>Undo</button>
       <canvas
-        className="canvas"
         ref={canvasRef}
         width={window.innerWidth}
         height={window.innerHeight}
-        onClick={handleCanvasClick}
+        onClick={(e) => {
+          const canvas = canvasRef.current;
+          const ctx = canvas.getContext('2d');
+          const newLocation = { x: e.clientX, y: e.clientY };
+          setLocations([...locations, newLocation]);
+          draw(ctx, newLocation);
+        }}
       />
     </div>
   );
