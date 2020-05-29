@@ -38,9 +38,14 @@ const IndividualLiveArt = () => {
   function handleClear() {
     setLocations([]);
   }
+
+  function handleUndo() {
+    setLocations(locations.slice(0, -1));
+  }
   return (
     <div>
       <button onClick={handleClear}>Clear</button>
+      <button onClick={handleUndo}>Undo</button>
       <canvas
         ref={canvasRef}
         width={window.innerWidth}
