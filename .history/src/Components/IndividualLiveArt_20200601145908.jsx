@@ -61,7 +61,6 @@ const IndividualLiveArt = () => {
 
   return (
     <div>
-      <ColorSelector selectColor={selectColor} />
       <canvas
         className="canvas"
         ref={canvasRef}
@@ -71,6 +70,7 @@ const IndividualLiveArt = () => {
         onMouseUp={onMouseUp}
         onMouseMove={onMouseMove}
       />
+      <ColorSelector selectColor={selectColor} />
     </div>
   );
 };

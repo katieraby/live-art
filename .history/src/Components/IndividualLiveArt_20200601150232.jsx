@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-//import socketIOClient from 'socket.io-client';
+import socketIOClient from 'socket.io-client';
 import ColorSelector from './ColorSelector';
 
 // const socket = socketIOClient(
