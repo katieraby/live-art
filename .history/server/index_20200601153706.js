@@ -8,11 +8,18 @@ app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/public`));
 console.log('express and socket.io are listening on port 8080');
 
-io.sockets.on('connect', (socket) => {
+io.sockets.on('connection', (socket) => {
   socket.emit('init', {});
 });
 
-module.exports = {
-  app,
-  io,
-};
+// const path = require('path');
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'public/index.html'));
+// });
+
+// const PORT = 4010;
+// server.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+// module.exports = {
+//   app,
+//   io,
+// };

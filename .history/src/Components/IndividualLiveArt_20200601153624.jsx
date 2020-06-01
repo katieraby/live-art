@@ -1,5 +1,8 @@
 import React, { useRef, useState } from 'react';
+import socketIOClient from 'socket.io-client';
 import ColorSelector from './ColorSelector';
+
+const socket = socketIOClient('http://86.164.3.73:4010');
 
 const IndividualLiveArt = () => {
   /*need to use ref as canvas behaves differently in the dom. most dom elements have a value property that you can update directly whereas canvas has a context, which allows us to draw things.  */
@@ -7,7 +10,7 @@ const IndividualLiveArt = () => {
 
   const [drawing, setDrawing] = useState(false);
   const [color, setColor] = useState('hotpink');
-  //const [cleared, setCleared] = useState(false);
+  const [cleared, setCleared] = useState(false);
   const [currentAxis, setCurrentAxis] = useState({ currentX: 0, currentY: 0 });
 
   // useEffect(() => {

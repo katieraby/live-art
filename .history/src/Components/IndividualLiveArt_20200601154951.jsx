@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+
 import ColorSelector from './ColorSelector';
 
 const IndividualLiveArt = () => {
@@ -7,7 +8,7 @@ const IndividualLiveArt = () => {
 
   const [drawing, setDrawing] = useState(false);
   const [color, setColor] = useState('hotpink');
-  //const [cleared, setCleared] = useState(false);
+  const [cleared, setCleared] = useState(false);
   const [currentAxis, setCurrentAxis] = useState({ currentX: 0, currentY: 0 });
 
   // useEffect(() => {
