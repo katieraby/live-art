@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import ColorSelector from './ColorSelector';
 import MetaTags from 'react-meta-tags';
 import socketIOClient from 'socket.io-client';
@@ -19,29 +19,14 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     socket.emit('join', { data: 'we have joined!!!' });
   });
 
-  useEffect(() => {
-    socket.on('drawingFromServer', (data) => {
-      console.log(data);
-      let w = window.innerWidth;
-      let h = window.innerHeight;
+  socket.on('drawingFromServer', (data) => {
+    console.log(data);
+    // let w = window.innerWidth;
+    // let h = window.innerHeight;
 
-      if (!isNaN(data.x0 / w) && !isNaN(data.y0)) {
-        console.log('is not nan');
-        return draw(
-          Math.floor(data.x0 * w),
-          Math.floor(data.y0 * h),
-          Math.floor(data.x1 * w),
-          Math.floor(data.y1 * h),
-          data.color
-        );
-      }
-    });
+    // draw(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color);
+    //if (!isNaN(data.x0 / w) && !isNaN(data.y0)) {}
   });
-
-  // useEffect(() => {
-  //   canvasRef.current.style.height = window.innerHeight;
-  //   canvasRef.current.style.width = window.innerWidth;
-  // });
 
   const onMouseDown = (e) => {
     if (isArtist) {
@@ -76,10 +61,8 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   };
 
   function draw(x0, y0, x1, y1, color, emit) {
-    console.log(x0, y0, x1, y1, color);
-
-    // const canvas = canvasRef.current;
-    const ctx = canvasRef.current.getContext('2d');
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
     ctx.beginPath();
     ctx.moveTo(x0, y0);
     ctx.lineTo(x1, y1);
@@ -94,16 +77,13 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
 
     let w = window.innerWidth;
     let h = window.innerHeight;
-    if (!isNaN(x0 / w)) {
-      socket.emit('drawing', {
-        x0: x0 / w,
-        y0: y0 / h,
-        x1: x1 / w,
-        y1: y1 / h,
-        color: color,
-      });
-    }
-    setCleared(false);
+    socket.emit('drawing', {
+      x0: x0 / w,
+      y0: y0 / h,
+      x1: x1 / w,
+      y1: y1 / h,
+      color: color,
+    });
   }
 
   const selectColor = (color) => {

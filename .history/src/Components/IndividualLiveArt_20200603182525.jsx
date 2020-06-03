@@ -27,7 +27,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
 
       if (!isNaN(data.x0 / w) && !isNaN(data.y0)) {
         console.log('is not nan');
-        return draw(
+        draw(
           Math.floor(data.x0 * w),
           Math.floor(data.y0 * h),
           Math.floor(data.x1 * w),

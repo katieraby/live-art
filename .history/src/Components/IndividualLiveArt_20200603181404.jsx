@@ -19,29 +19,28 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     socket.emit('join', { data: 'we have joined!!!' });
   });
 
-  useEffect(() => {
-    socket.on('drawingFromServer', (data) => {
-      console.log(data);
-      let w = window.innerWidth;
-      let h = window.innerHeight;
+  socket.on('drawingFromServer', (data) => {
+    console.log(data);
+    let w = window.innerWidth;
+    let h = window.innerHeight;
 
-      if (!isNaN(data.x0 / w) && !isNaN(data.y0)) {
-        console.log('is not nan');
-        return draw(
-          Math.floor(data.x0 * w),
-          Math.floor(data.y0 * h),
-          Math.floor(data.x1 * w),
-          Math.floor(data.y1 * h),
-          data.color
-        );
-      }
-    });
+    if (!isNaN(data.x0 / w) && !isNaN(data.y0)) {
+      console.log('is not nan');
+      draw(
+        Math.floor(data.x0 * w),
+        Math.floor(data.y0 * h),
+        Math.floor(data.x1 * w),
+        Math.floor(data.y1 * h),
+        data.color
+      );
+    }
   });
 
-  // useEffect(() => {
-  //   canvasRef.current.style.height = window.innerHeight;
-  //   canvasRef.current.style.width = window.innerWidth;
-  // });
+  useEffect(() => {
+    canvasRef = canvasRef.current;
+    canvasRef.current.style.height = window.innerHeight;
+    canvasRef.current.style.width = window.innerWidth;
+  });
 
   const onMouseDown = (e) => {
     if (isArtist) {

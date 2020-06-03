@@ -11,9 +11,9 @@ io.on('connection', (socket) => {
   socket.on('join', (msg) => {
     console.log(msg);
   });
-  socket.on('drawing', (data) => {
+  socket.on('drawingFromServer', (data) => {
     console.log(data);
-    socket.emit('drawingFromServer', data);
+    socket.emit('drawing', data);
   });
 });
 

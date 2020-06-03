@@ -13,7 +13,7 @@ io.on('connection', (socket) => {
   });
   socket.on('drawing', (data) => {
     console.log(data);
-    socket.emit('drawingFromServer', data);
+    socket.emit('drawing', data);
   });
 });
 
