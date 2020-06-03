@@ -1,9 +1,6 @@
 import React, { useRef, useState } from 'react';
 import ColorSelector from './ColorSelector';
 import MetaTags from 'react-meta-tags';
-import socketIOClient from 'socket.io-client';
-
-const socket = socketIOClient('http://localhost:8080');
 
 const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   /*need to use ref as canvas behaves differently in the dom. most dom elements have a value property that you can update directly whereas canvas has a context, which allows us to draw things.  */
@@ -13,10 +10,6 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   const [color, setColor] = useState('hotpink');
   //const [cleared, setCleared] = useState(false);
   const [currentAxis, setCurrentAxis] = useState({ currentX: 0, currentY: 0 });
-  socket.on('messageFromServer', (dataFromServer) => {
-    console.log(dataFromServer);
-    socket.emit('join', { data: 'we have joined!!!' });
-  });
 
   // useEffect(() => {
   //   const canvas = canvasRef.current;
@@ -65,9 +58,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   }
 
   const selectColor = (color) => {
-    if (isArtist) {
-      setColor(color);
-    }
+    setColor(color);
   };
 
   return (

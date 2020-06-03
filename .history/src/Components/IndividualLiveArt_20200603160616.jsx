@@ -13,9 +13,9 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   const [color, setColor] = useState('hotpink');
   //const [cleared, setCleared] = useState(false);
   const [currentAxis, setCurrentAxis] = useState({ currentX: 0, currentY: 0 });
-  socket.on('messageFromServer', (dataFromServer) => {
-    console.log(dataFromServer);
-    socket.emit('join', { data: 'we have joined!!!' });
+
+  socket.emit('join', (join) => {
+    console.log('joined on the client');
   });
 
   // useEffect(() => {
