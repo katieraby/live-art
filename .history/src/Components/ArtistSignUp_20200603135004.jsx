@@ -4,20 +4,19 @@ const ArtistSignUp = ({ setHasAccount }) => {
   const [artistInfo, setArtistInfo] = useState({
     username: '',
     password: '',
-    bio: '',
-    paymentPointer: '',
+    aboutMe: '',
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(artistInfo);
     //api post request
-    setArtistInfo({ username: '', password: '', bio: '', paymentPointer: '' });
+    setArtistInfo({ username: '', password: '', aboutMe: '' });
     setHasAccount(true);
   };
 
   return (
-    <div className="signUp">
+    <div>
       <form className="artistSignUpForm" onSubmit={handleSubmit}>
         <label className="artistSignUpLabel">Artist Sign Up</label>
         <input
@@ -41,36 +40,17 @@ const ArtistSignUp = ({ setHasAccount }) => {
           }
         />
         <textarea
-          className="artistSignUpBio"
-          placeholder="bio"
-          value={artistInfo.bio}
+          className="artistSignUpAboutMe"
+          placeholder="about me"
+          value={artistInfo.aboutMe}
           required
           onChange={(e) =>
-            setArtistInfo({ ...artistInfo, bio: e.target.value })
-          }
-        />
-        <input
-          className="artistLogInPaymentPointer"
-          placeholder="payment pointer"
-          value={artistInfo.paymentPointer}
-          required
-          onChange={(e) =>
-            setArtistInfo({ ...artistInfo, paymentPointer: e.target.value })
+            setArtistInfo({ ...artistInfo, aboutMe: e.target.value })
           }
         />
         <button>Sign Up</button>
       </form>
-      <button
-        onClick={() => {
-          setHasAccount(true);
-        }}
-      >
-        Already have an account? Log in here
-      </button>
-      <p>
-        Don't have a payment pointer? Read about web monetization and setting
-        one up <a href="https://coil.com/about">here</a>
-      </p>
+      <button>Already have an account? Log in here</button>
     </div>
   );
 };

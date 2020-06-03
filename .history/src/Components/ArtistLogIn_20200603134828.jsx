@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ArtistSignUp from './ArtistSignUp';
 import { navigate } from '@reach/router';
 
-const ArtistLogIn = ({ setArtistInfo, setIsArtist }) => {
+const ArtistLogIn = ({ setArtistInfo }) => {
   const [hasAccount, setHasAccount] = useState(true);
   const [logInDetails, setLogInDetails] = useState({
     username: '',
@@ -20,7 +20,6 @@ const ArtistLogIn = ({ setArtistInfo, setIsArtist }) => {
       bio: 'taptrip programmer extraordinaire!',
       paymentPointer: '$ilp.uphold.com/43EbNHaB4DYm',
     });
-    setIsArtist(true);
     navigate(`/${logInDetails.username}`);
     setLogInDetails({ username: '', password: '' });
   };

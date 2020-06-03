@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import ColorSelector from './ColorSelector';
 import MetaTags from 'react-meta-tags';
 
-const IndividualLiveArt = ({ artistInfo, isArtist }) => {
+const IndividualLiveArt = ({ paymentPointer }) => {
   /*need to use ref as canvas behaves differently in the dom. most dom elements have a value property that you can update directly whereas canvas has a context, which allows us to draw things.  */
   const canvasRef = useRef(null);
 
@@ -40,6 +40,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   };
 
   function draw(x0, y0, x1, y1) {
+    console.log(paymentPointer);
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     ctx.beginPath();
@@ -58,24 +59,20 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   return (
     <div className="wrapper">
       <MetaTags>
-        <meta name="monetization" content={artistInfo.paymentPointer}></meta>
+        <meta name="monetization" content={paymentPointer}></meta>
+        <div>
+          <ColorSelector selectColor={selectColor} />
+          <canvas
+            className="canvas"
+            ref={canvasRef}
+            width={window.innerWidth}
+            height={window.innerHeight}
+            onMouseDown={onMouseDown}
+            onMouseUp={onMouseUp}
+            onMouseMove={onMouseMove}
+          />
+        </div>
       </MetaTags>
-      <div>
-        <ColorSelector selectColor={selectColor} />
-        {/* {document.monetization
-          ? console.log('page is monetized')
-          : console.log('no money', document.monetization)} */}
-        {console.log(document.monetization.state)}
-        <canvas
-          className="canvas"
-          ref={canvasRef}
-          width={window.innerWidth}
-          height={window.innerHeight}
-          onMouseDown={onMouseDown}
-          onMouseUp={onMouseUp}
-          onMouseMove={onMouseMove}
-        />
-      </div>
     </div>
   );
 };

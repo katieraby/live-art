@@ -13,24 +13,15 @@ function App() {
     bio: '',
     paymentPointer: '',
   });
-  const [isArtist, setIsArtist] = useState(false);
 
   return (
     <div className="App">
       <Header />
       <Router className="main-content">
         <LiveArt path="/" />
-        <ArtistLogIn
-          path="/artist-log-in"
-          setArtistInfo={setArtistInfo}
-          setIsArtist={setIsArtist}
-        />
+        <ArtistLogIn path="/artist-log-in" />
         <UserLogIn path="/coil-log-in" />
-        <IndividualLiveArt
-          path="/:username"
-          artistInfo={artistInfo}
-          isArtist={isArtist}
-        />
+        <IndividualLiveArt path="/:username" {...artistInfo} />
       </Router>
     </div>
   );

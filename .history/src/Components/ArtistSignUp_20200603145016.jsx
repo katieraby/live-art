@@ -67,10 +67,10 @@ const ArtistSignUp = ({ setHasAccount }) => {
       >
         Already have an account? Log in here
       </button>
-      <p>
+      <a href="https://coil.com/about">
         Don't have a payment pointer? Read about web monetization and setting
-        one up <a href="https://coil.com/about">here</a>
-      </p>
+        one up here
+      </a>
     </div>
   );
 };

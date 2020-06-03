@@ -69,7 +69,8 @@ const ArtistSignUp = ({ setHasAccount }) => {
       </button>
       <p>
         Don't have a payment pointer? Read about web monetization and setting
-        one up <a href="https://coil.com/about">here</a>
+        one up
+        <a href="https://coil.com/about">here</a>
       </p>
     </div>
   );

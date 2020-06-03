@@ -20,17 +20,9 @@ function App() {
       <Header />
       <Router className="main-content">
         <LiveArt path="/" />
-        <ArtistLogIn
-          path="/artist-log-in"
-          setArtistInfo={setArtistInfo}
-          setIsArtist={setIsArtist}
-        />
+        <ArtistLogIn path="/artist-log-in" setArtistInfo={setArtistInfo} />
         <UserLogIn path="/coil-log-in" />
-        <IndividualLiveArt
-          path="/:username"
-          artistInfo={artistInfo}
-          isArtist={isArtist}
-        />
+        <IndividualLiveArt path="/:username" artistInfo={artistInfo} />
       </Router>
     </div>
   );

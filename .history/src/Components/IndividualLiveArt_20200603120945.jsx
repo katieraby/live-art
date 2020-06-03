@@ -2,7 +2,8 @@ import React, { useRef, useState } from 'react';
 import ColorSelector from './ColorSelector';
 import MetaTags from 'react-meta-tags';
 
-const IndividualLiveArt = ({ artistInfo, isArtist }) => {
+const IndividualLiveArt = (props) => {
+  console.log(props.artistInfo);
   /*need to use ref as canvas behaves differently in the dom. most dom elements have a value property that you can update directly whereas canvas has a context, which allows us to draw things.  */
   const canvasRef = useRef(null);
 
@@ -62,10 +63,6 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
       </MetaTags>
       <div>
         <ColorSelector selectColor={selectColor} />
-        {/* {document.monetization
-          ? console.log('page is monetized')
-          : console.log('no money', document.monetization)} */}
-        {console.log(document.monetization.state)}
         <canvas
           className="canvas"
           ref={canvasRef}

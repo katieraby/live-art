@@ -20,7 +20,6 @@ const ArtistLogIn = ({ setArtistInfo, setIsArtist }) => {
       bio: 'taptrip programmer extraordinaire!',
       paymentPointer: '$ilp.uphold.com/43EbNHaB4DYm',
     });
-    setIsArtist(true);
     navigate(`/${logInDetails.username}`);
     setLogInDetails({ username: '', password: '' });
   };

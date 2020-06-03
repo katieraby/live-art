@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import ArtistSignUp from './ArtistSignUp';
-import { navigate } from '@reach/router';
+import { Link } from '@reach/router';
 
-const ArtistLogIn = ({ setArtistInfo, setIsArtist }) => {
+const ArtistLogIn = () => {
   const [hasAccount, setHasAccount] = useState(true);
   const [logInDetails, setLogInDetails] = useState({
     username: '',
@@ -15,13 +15,6 @@ const ArtistLogIn = ({ setArtistInfo, setIsArtist }) => {
     //api get request to check artist exists and provide username to link below
     //if ok set log in details, navigate to individual artist page
     //add artist to context array of artists
-    setArtistInfo({
-      username: 'katie',
-      bio: 'taptrip programmer extraordinaire!',
-      paymentPointer: '$ilp.uphold.com/43EbNHaB4DYm',
-    });
-    setIsArtist(true);
-    navigate(`/${logInDetails.username}`);
     setLogInDetails({ username: '', password: '' });
   };
 
@@ -51,7 +44,11 @@ const ArtistLogIn = ({ setArtistInfo, setIsArtist }) => {
                 setLogInDetails({ ...logInDetails, password: e.target.value })
               }
             />
-            <button>Log In</button>
+            <button>
+              <Link to={`/${logInDetails.username}`} paymentPointer={'sarah'}>
+                Log In
+              </Link>
+            </button>
           </form>
           <button
             onClick={() => {
@@ -62,7 +59,7 @@ const ArtistLogIn = ({ setArtistInfo, setIsArtist }) => {
           </button>
         </div>
       ) : (
-        <ArtistSignUp setHasAccount={setHasAccount} />
+        <ArtistSignUp />
       )}
     </div>
   );
