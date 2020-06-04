@@ -67,11 +67,6 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     }
   });
 
-  // useEffect(() => {
-  //   canvasRef.current.style.height = window.innerHeight;
-  //   canvasRef.current.style.width = window.innerWidth;
-  // });
-
   const onMouseDown = (e) => {
     if (isArtist) {
       setCurrentAxis({ currentX: e.clientX, currentY: e.clientY });
@@ -151,19 +146,41 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
       <MetaTags>
         <meta name="monetization" content={artistInfo.paymentPointer}></meta>
       </MetaTags>
-      <div>
-        <ColorSelector selectColor={selectColor} />
-        {/* {document.monetization
-          ? console.log('page is monetized')
-          : console.log('no money', document.monetization)} */}
-        {/* {console.log(document.monetization.state)} */}
-        <canvas
-          className="canvas"
-          ref={canvasRef}
-          width={window.innerWidth}
-          height={window.innerHeight}
-        />
-      </div>
+      {isArtist || document.monetization.state === "started" ? (
+        <div>
+          <ColorSelector selectColor={selectColor} />
+          <canvas
+            className="canvas"
+            ref={canvasRef}
+            width={window.innerWidth}
+            height={window.innerHeight}
+          />
+        </div>
+      ) : (
+        <div>
+          <h2>Live Art is a web monetized project.</h2>
+          <h2>
+            This means that you will need to set up a virtual wallet to send
+            micro-payments over the internet, in this case, to the artist you
+            are supporting.
+          </h2>
+
+          <h2>
+            Find out more and sign up with{" "}
+            {<a href="https://coil.com/">Coil</a>}, and download the{" "}
+            {
+              <a href="https://chrome.google.com/webstore/detail/coil/locbifcbeldmnphbgkdigjmkbfkhbnca?hl=en">
+                Google Chrome browser extension
+              </a>
+            }{" "}
+            to support your local artist.
+          </h2>
+          <h2>
+            Once you have installed the extension, please return to this site to
+            view Live Art!
+          </h2>
+        </div>
+      )}
     </div>
   );
 };
