@@ -3,7 +3,7 @@ import ColorSelector from "./ColorSelector";
 import MetaTags from "react-meta-tags";
 import socketIOClient from "socket.io-client";
 
-const socket = socketIOClient("http://192.168.1.145:8080");
+const socket = socketIOClient();
 
 const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   /*need to use ref as canvas behaves differently in the dom. most dom elements have a value property that you can update directly whereas canvas has a context, which allows us to draw things.  */
