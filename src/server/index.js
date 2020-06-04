@@ -13,8 +13,8 @@ app.get("*", (req, res) => {
 
 io.on("connection", (socket) => {
   socket.emit("messageFromServer", { data: "welcome to the io server" });
-  socket.on("join", (msg) => {
-    console.log(msg);
+  socket.on("join", (data) => {
+    socket.broadcast.emit("paymentPointer", data);
   });
   socket.on("drawing", (data) => {
     socket.broadcast.emit("drawingFromServer", data);

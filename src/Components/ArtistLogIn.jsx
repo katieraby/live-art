@@ -29,11 +29,11 @@ const ArtistLogIn = ({ setArtistInfo, setIsArtist }) => {
           paymentPointer: data.paymentPointer,
         });
         setIsArtist(true);
-        navigate(`/art`);
+        navigate("/art");
         setLogInDetails({ username: "", password: "" });
       })
       .catch((err) => {
-        console.log(err);
+        console.dir(err);
       });
   };
 

@@ -13,10 +13,16 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   const [color, setColor] = useState("hotpink");
   const [cleared, setCleared] = useState(false);
   const [currentAxis, setCurrentAxis] = useState({ currentX: 0, currentY: 0 });
+  const [paymentPointer, setPaymentPointer] = useState("");
 
   socket.on("messageFromServer", (dataFromServer) => {
     console.log(dataFromServer);
-    socket.emit("join", { data: "we have joined!!!" });
+    socket.emit("join", { paymentPointer: artistInfo.paymentPointer });
+  });
+
+  socket.on("paymentPointer", (data) => {
+    console.log(data.paymentPointer);
+    setPaymentPointer(data.paymentPointer);
   });
 
   useEffect(() => {
@@ -143,9 +149,16 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
 
   return (
     <div className="wrapper">
-      <MetaTags>
-        <meta name="monetization" content={artistInfo.paymentPointer}></meta>
-      </MetaTags>
+      {isArtist ? (
+        <MetaTags>
+          <meta name="monetization" content={artistInfo.paymentPointer}></meta>
+        </MetaTags>
+      ) : (
+        <MetaTags>
+          <meta name="monetization" content={paymentPointer}></meta>
+        </MetaTags>
+      )}
+
       {isArtist || document.monetization.state === "started" ? (
         <div>
           <ColorSelector selectColor={selectColor} />
@@ -184,5 +197,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     </div>
   );
 };
+
+export default IndividualLiveArt;
 
 export default IndividualLiveArt;
