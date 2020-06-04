@@ -8,8 +8,12 @@ const LiveArt = ({ username }) => {
   return (
     <div>
       <p>Live Art List</p>
-      <button>
-        <Link to={`/${username}`}>View Live Art</Link>
+      <button
+        onClick={() => {
+          console.log("clicking");
+        }}
+      >
+        <Link to="/art">View Live Art</Link>
       </button>
     </div>
   );

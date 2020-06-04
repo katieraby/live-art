@@ -28,7 +28,7 @@ function App() {
         />
         <UserLogIn path="/coil-log-in" />
         <IndividualLiveArt
-          path="/:username"
+          path="/art"
           artistInfo={artistInfo}
           isArtist={isArtist}
           primary={false}
