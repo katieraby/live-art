@@ -5,7 +5,7 @@ const io = require("socket.io")(server);
 const index = "/index.html";
 
 app.use(express.json());
-app.use(express.static(__dirname + "../build"));
+app.use(express.static(__dirname + "../../build"));
 
 app.use((req, res) => res.sendFile(index, { root: "./build" }));
 
