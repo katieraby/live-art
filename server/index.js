@@ -2,11 +2,12 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
+const index = "/index.html";
 
 app.use(express.json());
 app.use(express.static(__dirname + "../build"));
 
-app.get("/", (req, res, next) => res.sendFile("../build/index.html"));
+app.use((req, res) => res.sendFile(index, { root: "./build" }));
 
 io.on("connection", (socket) => {
   socket.emit("messageFromServer", { data: "welcome to the io server" });
