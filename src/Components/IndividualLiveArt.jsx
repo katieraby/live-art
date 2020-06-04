@@ -53,7 +53,6 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   });
 
   socket.on("drawingFromServer", (data) => {
-    console.log(data);
     let w = window.innerWidth;
     let h = window.innerHeight;
 
@@ -82,8 +81,8 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
 
   const onMouseUp = (e) => {
     if (isArtist) {
-      setDrawing(false);
       setCurrentAxis({ currentX: e.clientX, currentY: e.clientY });
+      setDrawing(false);
     }
   };
 
