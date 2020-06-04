@@ -3,7 +3,7 @@ import ColorSelector from "./ColorSelector";
 import MetaTags from "react-meta-tags";
 import socketIOClient from "socket.io-client";
 
-const socket = socketIOClient();
+const socket = socketIOClient("live-art.herokuapp.com");
 
 const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   /*need to use ref as canvas behaves differently in the dom. most dom elements have a value property that you can update directly whereas canvas has a context, which allows us to draw things.  */
@@ -16,12 +16,12 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   const [paymentPointer, setPaymentPointer] = useState("");
 
   socket.on("messageFromServer", (dataFromServer) => {
-    console.log(dataFromServer);
+    console.log(dataFromServer, "dataFromServer");
     socket.emit("join", { paymentPointer: artistInfo.paymentPointer });
   });
 
   socket.on("paymentPointer", (data) => {
-    console.log(data.paymentPointer);
+    console.log(data.paymentPointer, "paymentPointer");
     setPaymentPointer(data.paymentPointer);
   });
 
