@@ -199,5 +199,3 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
 };
 
 export default IndividualLiveArt;
-
-export default IndividualLiveArt;
