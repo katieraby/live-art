@@ -1,28 +1,40 @@
-import React, { useState } from 'react';
-import ArtistSignUp from './ArtistSignUp';
-import { navigate } from '@reach/router';
+import React, { useState } from "react";
+import ArtistSignUp from "./ArtistSignUp";
+import { navigate } from "@reach/router";
+import axios from "axios";
 
 const ArtistLogIn = ({ setArtistInfo, setIsArtist }) => {
   const [hasAccount, setHasAccount] = useState(true);
   const [logInDetails, setLogInDetails] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(logInDetails, 'apirequest');
+    console.log(logInDetails, "apirequest");
     //api get request to check artist exists and provide username to link below
     //if ok set log in details, navigate to individual artist page
     //add artist to context array of artists
-    setArtistInfo({
-      username: 'katie',
-      bio: 'taptrip programmer extraordinaire!',
-      paymentPointer: '$ilp.uphold.com/43EbNHaB4DYm',
-    });
-    setIsArtist(true);
-    navigate(`/${logInDetails.username}`);
-    setLogInDetails({ username: '', password: '' });
+    return axios
+      .post(
+        `https://live-art-backend.herokuapp.com/artist/${logInDetails.username}`,
+        logInDetails
+      )
+      .then(({ data }) => {
+        console.log(data);
+        setArtistInfo({
+          username: data.username,
+          bio: data.aboutMe,
+          paymentPointer: data.paymentPointer,
+        });
+        setIsArtist(true);
+        navigate(`/${data.username}`);
+        setLogInDetails({ username: "", password: "" });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import './App.css';
-import { Router } from '@reach/router';
-import Header from './Components/Header';
-import ArtistLogIn from './Components/ArtistLogIn';
-import UserLogIn from './Components/UserLogIn';
-import LiveArt from './Components/LiveArt';
-import IndividualLiveArt from './Components/IndividualLiveArt';
+import React, { useState } from "react";
+import "./App.css";
+import { Router } from "@reach/router";
+import Header from "./Components/Header";
+import ArtistLogIn from "./Components/ArtistLogIn";
+import UserLogIn from "./Components/UserLogIn";
+import LiveArt from "./Components/LiveArt";
+import IndividualLiveArt from "./Components/IndividualLiveArt";
 
 function App() {
   const [artistInfo, setArtistInfo] = useState({
-    username: '',
-    bio: '',
-    paymentPointer: '',
+    username: "",
+    bio: "",
+    paymentPointer: "",
   });
   const [isArtist, setIsArtist] = useState(false);
 
@@ -19,7 +19,7 @@ function App() {
     <div className="App">
       <Header />
       <Router className="main-content">
-        <LiveArt path="/" />
+        <LiveArt path="/" username={artistInfo.username} />
         <ArtistLogIn
           path="/artist-log-in"
           setArtistInfo={setArtistInfo}

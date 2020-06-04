@@ -1,19 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import axios from "axios";
 
 const ArtistSignUp = ({ setHasAccount }) => {
   const [artistInfo, setArtistInfo] = useState({
-    username: '',
-    password: '',
-    bio: '',
-    paymentPointer: '',
+    username: "",
+    password: "",
+    aboutMe: "",
+    paymentPointer: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(artistInfo);
-    //api post request
-    setArtistInfo({ username: '', password: '', bio: '', paymentPointer: '' });
-    setHasAccount(true);
+    return axios
+      .post("https://live-art-backend.herokuapp.com/artist", artistInfo)
+      .then(() => {
+        setArtistInfo({
+          username: "",
+          password: "",
+          aboutMe: "",
+          paymentPointer: "",
+        });
+        setHasAccount(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -41,12 +52,12 @@ const ArtistSignUp = ({ setHasAccount }) => {
           }
         />
         <textarea
-          className="artistSignUpBio"
-          placeholder="bio"
-          value={artistInfo.bio}
+          className="artistSignUpaboutMe"
+          placeholder="aboutMe"
+          value={artistInfo.aboutMe}
           required
           onChange={(e) =>
-            setArtistInfo({ ...artistInfo, bio: e.target.value })
+            setArtistInfo({ ...artistInfo, aboutMe: e.target.value })
           }
         />
         <input
