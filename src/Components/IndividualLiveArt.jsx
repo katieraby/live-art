@@ -1,41 +1,71 @@
-import React, { useEffect, useRef, useState } from 'react';
-import ColorSelector from './ColorSelector';
-import MetaTags from 'react-meta-tags';
-import socketIOClient from 'socket.io-client';
+import React, { useEffect, useRef, useState } from "react";
+import ColorSelector from "./ColorSelector";
+import MetaTags from "react-meta-tags";
+import socketIOClient from "socket.io-client";
 
-const socket = socketIOClient('http://192.168.1.65:8080');
+const socket = socketIOClient("http://192.168.1.134:8080");
 
 const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   /*need to use ref as canvas behaves differently in the dom. most dom elements have a value property that you can update directly whereas canvas has a context, which allows us to draw things.  */
-  const canvasRef = useRef(null);
 
+  const canvasRef = useRef(null);
   const [drawing, setDrawing] = useState(false);
-  const [color, setColor] = useState('hotpink');
+  const [color, setColor] = useState("hotpink");
   const [cleared, setCleared] = useState(false);
   const [currentAxis, setCurrentAxis] = useState({ currentX: 0, currentY: 0 });
 
-  socket.on('messageFromServer', (dataFromServer) => {
+  socket.on("messageFromServer", (dataFromServer) => {
     console.log(dataFromServer);
-    socket.emit('join', { data: 'we have joined!!!' });
+    socket.emit("join", { data: "we have joined!!!" });
   });
 
   useEffect(() => {
-    socket.on('drawingFromServer', (data) => {
-      console.log(data);
-      let w = window.innerWidth;
-      let h = window.innerHeight;
+    if (!canvasRef.current) {
+      return;
+    }
+    const canvas = canvasRef.current;
+    canvas.addEventListener("mousedown", onMouseDown);
+    return () => {
+      canvas.removeEventListener("mousedown", onMouseDown);
+    };
+  });
 
-      if (!isNaN(data.x0 / w) && !isNaN(data.y0)) {
-        console.log('is not nan');
-        return draw(
-          Math.floor(data.x0 * w),
-          Math.floor(data.y0 * h),
-          Math.floor(data.x1 * w),
-          Math.floor(data.y1 * h),
-          data.color
-        );
-      }
-    });
+  useEffect(() => {
+    if (!canvasRef.current) {
+      return;
+    }
+    const canvas = canvasRef.current;
+    canvas.addEventListener("mousemove", onMouseMove);
+    return () => {
+      canvas.removeEventListener("mousemove", onMouseMove);
+    };
+  });
+
+  useEffect(() => {
+    if (!canvasRef.current) {
+      return;
+    }
+    const canvas = canvasRef.current;
+    canvas.addEventListener("mouseup", onMouseUp);
+    return () => {
+      canvas.removeEventListener("mouseup", onMouseUp);
+    };
+  });
+
+  socket.on("drawingFromServer", (data) => {
+    console.log(data);
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+
+    if (!isNaN(data.x0 / w) && !isNaN(data.y0)) {
+      draw(
+        Math.floor(data.x0 * w),
+        Math.floor(data.y0 * h),
+        Math.floor(data.x1 * w),
+        Math.floor(data.y1 * h),
+        data.color
+      );
+    }
   });
 
   // useEffect(() => {
@@ -76,17 +106,22 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   };
 
   function draw(x0, y0, x1, y1, color, emit) {
-    console.log(x0, y0, x1, y1, color);
+    if (!canvasRef.current) {
+      return;
+    }
 
-    // const canvas = canvasRef.current;
-    const ctx = canvasRef.current.getContext('2d');
-    ctx.beginPath();
-    ctx.moveTo(x0, y0);
-    ctx.lineTo(x1, y1);
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 2;
-    ctx.stroke();
-    ctx.closePath();
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
+    if (ctx) {
+      ctx.beginPath();
+      ctx.moveTo(x0, y0);
+      ctx.lineTo(x1, y1);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.closePath();
+    }
 
     if (!emit) {
       return;
@@ -95,7 +130,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     let w = window.innerWidth;
     let h = window.innerHeight;
     if (!isNaN(x0 / w)) {
-      socket.emit('drawing', {
+      socket.emit("drawing", {
         x0: x0 / w,
         y0: y0 / h,
         x1: x1 / w,
@@ -128,9 +163,6 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
           ref={canvasRef}
           width={window.innerWidth}
           height={window.innerHeight}
-          onMouseDown={onMouseDown}
-          onMouseUp={onMouseUp}
-          onMouseMove={onMouseMove}
         />
       </div>
     </div>
