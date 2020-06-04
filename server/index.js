@@ -6,7 +6,7 @@ const io = require("socket.io")(server);
 app.use(express.json());
 app.use(express.static(__dirname + "../build"));
 
-// app.get("/", (req, res, next) => res.sendFile(__dirname + "./index.html"));
+app.get("/", (req, res, next) => res.sendFile(__dirname + ".build/index.html"));
 
 io.on("connection", (socket) => {
   socket.emit("messageFromServer", { data: "welcome to the io server" });
