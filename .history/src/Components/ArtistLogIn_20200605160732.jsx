@@ -43,9 +43,7 @@ const ArtistLogIn = ({ setArtistInfo, setIsArtist }) => {
       {hasAccount ? (
         <div>
           <form className={styles.artistLogInForm} onSubmit={handleSubmit}>
-            <label className={styles.artistLogInLabel}>
-              Artist Log In Here
-            </label>
+            <label className={styles.artistLogInLabel}>Artist Log In</label>
             <input
               className={styles.artistLogInUsername}
               placeholder="username"
@@ -66,10 +64,9 @@ const ArtistLogIn = ({ setArtistInfo, setIsArtist }) => {
                 setLogInDetails({ ...logInDetails, password: e.target.value })
               }
             />
-            <button className={styles.artistLogInButton}>Log In</button>
+            <button>Log In</button>
           </form>
           <button
-            className={styles.needAccountButton}
             onClick={() => {
               setHasAccount(false);
             }}

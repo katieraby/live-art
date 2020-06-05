@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div className={styles.App}>
-      <Header className={styles.headerTop} isArtist={isArtist} />
+      <Header className={styles.header} isArtist={isArtist} />
       <Router className={styles.mainContent}>
         <LiveArt path="/" />
 

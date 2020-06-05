@@ -1,0 +1,17 @@
+.artistLogInForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.artistLogInLabel {
+}
+
+.artistLogInUsername {
+}
+
+.artistLogInPassword {
+}
+
+.artistLogInButton {
+}

@@ -1,0 +1,25 @@
+.artistLogInForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.artistLogInLabel {
+  margin: 0.5em;
+}
+
+.artistLogInUsername {
+  margin-bottom: 0.5em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.artistLogInPassword {
+  margin-bottom: 0.5em;
+}
+
+.artistLogInButton {
+  margin-bottom: 0.5em;
+}

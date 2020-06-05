@@ -43,9 +43,7 @@ const ArtistLogIn = ({ setArtistInfo, setIsArtist }) => {
       {hasAccount ? (
         <div>
           <form className={styles.artistLogInForm} onSubmit={handleSubmit}>
-            <label className={styles.artistLogInLabel}>
-              Artist Log In Here
-            </label>
+            <label className={styles.artistLogInLabel}>Artist Log In</label>
             <input
               className={styles.artistLogInUsername}
               placeholder="username"

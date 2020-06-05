@@ -30,10 +30,10 @@ const ArtistSignUp = ({ setHasAccount }) => {
 
   return (
     <div className="signUp">
-      <form className={styles.artistSignUpForm} onSubmit={handleSubmit}>
-        <label className={styles.artistSignUpLabel}>Artist Sign Up</label>
+      <form className="artistSignUpForm" onSubmit={handleSubmit}>
+        <label className="artistSignUpLabel">Artist Sign Up</label>
         <input
-          className={styles.artistSignUpUsername}
+          className="artistSignUpUsername"
           placeholder="username"
           type="text"
           value={artistInfo.username}
@@ -43,7 +43,7 @@ const ArtistSignUp = ({ setHasAccount }) => {
           }
         />
         <input
-          className={styles.artistSignUpPassword}
+          className="artistLogInPassword"
           placeholder="password"
           type="password"
           value={artistInfo.password}
@@ -53,7 +53,7 @@ const ArtistSignUp = ({ setHasAccount }) => {
           }
         />
         <textarea
-          className={styles.artistSignUpAboutMe}
+          className="artistSignUpaboutMe"
           placeholder="aboutMe"
           value={artistInfo.aboutMe}
           required
@@ -62,7 +62,7 @@ const ArtistSignUp = ({ setHasAccount }) => {
           }
         />
         <input
-          className={styles.artistSignUpPaymentPointer}
+          className="artistLogInPaymentPointer"
           placeholder="payment pointer"
           value={artistInfo.paymentPointer}
           required
@@ -70,10 +70,9 @@ const ArtistSignUp = ({ setHasAccount }) => {
             setArtistInfo({ ...artistInfo, paymentPointer: e.target.value })
           }
         />
-        <button className={styles.artistSignUpButton}>Sign Up</button>
+        <button>Sign Up</button>
       </form>
       <button
-        className={styles.haveAccountButton}
         onClick={() => {
           setHasAccount(true);
         }}
