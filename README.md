@@ -53,7 +53,7 @@ npm i react reach@router axios express socket.io socket.io-client react-color re
 alternatively
 
 ```
-npm i -y
+npm install
 ```
 
 4. To launch the application locally type the following commands in separate terminals
