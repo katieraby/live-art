@@ -30,9 +30,11 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     socket.emit("join", { room: room });
   }
 
-  socket.on("paymentPointer", (paymentPointer) => {
-    console.log(paymentPointer);
-    setPaymentPointer(paymentPointer);
+  useEffect(() => {
+    socket.on("paymentPointer", (paymentPointer) => {
+      console.log(paymentPointer);
+      setPaymentPointer(paymentPointer);
+    });
   });
 
   useEffect(() => {
