@@ -16,16 +16,17 @@ function App() {
 
   return (
     <div className="App">
-      <Header isArtist={isArtist} />
+      <Header />
       <Router className="main-content">
         <LiveArt path="/" />
-
-        <ArtistLogIn
-          path="/artist-log-in"
-          setArtistInfo={setArtistInfo}
-          setIsArtist={setIsArtist}
-          primary={false}
-        />
+        {!isArtist && (
+          <ArtistLogIn
+            path="/artist-log-in"
+            setArtistInfo={setArtistInfo}
+            setIsArtist={setIsArtist}
+            primary={false}
+          />
+        )}
 
         <IndividualLiveArt
           path="/art"

@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from '@reach/router';
 
-const Header = ({ isArtist }) => {
+const Header = () => {
   return (
     <header className="header">
-      {!isArtist && <Link to="/artist-log-in">Artist Log In</Link>}
-
+      <Link to="/artist-log-in">Artist Log In</Link>
       <h1>
         <Link to="/">Live Art</Link>
       </h1>
+      <Link to="/coil-log-in">Supporter Log In</Link>
     </header>
   );
 };
