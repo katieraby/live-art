@@ -35,9 +35,11 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     setPaymentPointer(paymentPointer);
   });
 
-  if (paymentPointer !== "") {
-    setStartedPayment(true);
-  }
+  useEffect(() => {
+    if (paymentPointer !== "") {
+      setStartedPayment(true);
+    }
+  }, [paymentPointer]);
 
   useEffect(() => {
     if (!canvasRef.current) {
