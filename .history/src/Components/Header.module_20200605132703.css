@@ -1,0 +1,13 @@
+.header {
+  background-color: #bd4f6c;
+  margin: 0;
+}
+
+.headerText {
+  padding: 1em;
+}
+
+.logInLink {
+  padding: 1em;
+  margin: 2em;
+}

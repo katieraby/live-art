@@ -1,0 +1,30 @@
+.header {
+  background-color: #bd4f6c;
+  margin: 0;
+}
+
+.headerText {
+  padding: 1em;
+  margin: 0;
+}
+
+.headerTextLink {
+  text-decoration: none;
+  color: #fffffc;
+}
+.headerTextLink:hover {
+  color: #b0bea9;
+}
+
+.logInText {
+  padding: 1em;
+}
+
+.logInLink {
+  text-decoration: none;
+  color: #fffffc;
+}
+
+.logInLink:hover {
+  color: #b0bea9;
+}
