@@ -148,7 +148,6 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
         x1: x1 / w,
         y1: y1 / h,
         color: color,
-        room: room,
       });
     }
     setCleared(false);

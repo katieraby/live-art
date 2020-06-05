@@ -3,7 +3,7 @@ import ColorSelector from './ColorSelector';
 import MetaTags from 'react-meta-tags';
 import socketIOClient from 'socket.io-client';
 
-const socket = socketIOClient('http://localhost:8080');
+const socket = socketIOClient('http://86.164.3.73:8080');
 
 const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   /*need to use ref as canvas behaves differently in the dom. most dom elements have a value property that you can update directly whereas canvas has a context, which allows us to draw things.  */
@@ -14,28 +14,16 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   const [cleared, setCleared] = useState(false);
   const [currentAxis, setCurrentAxis] = useState({ currentX: 0, currentY: 0 });
   const [paymentPointer, setPaymentPointer] = useState('');
-  const [room] = useState('art');
 
-  // socket.on('messageFromServer', (dataFromServer) => {
-  //   console.log(dataFromServer, 'dataFromServer');
-  if (isArtist) {
-    socket.emit('join', {
-      room: room,
-      paymentPointer: artistInfo.paymentPointer,
-    });
-  } else {
-    socket.emit('join', { room: room });
-  }
+  socket.on('messageFromServer', (dataFromServer) => {
+    console.log(dataFromServer, 'dataFromServer');
+    socket.emit('join', { paymentPointer: artistInfo.paymentPointer });
+  });
 
   socket.on('paymentPointer', (data) => {
-    console.log(data);
-    setPaymentPointer(paymentPointer);
+    console.log(data.paymentPointer, 'paymentPointer');
+    setPaymentPointer(data.paymentPointer);
   });
-  //});
-
-  // socket.on('paymentPointer', (data) => {
-  //   console.log(data.paymentPointer, 'paymentPointer');
-  // });
 
   useEffect(() => {
     if (!canvasRef.current) {
@@ -148,7 +136,6 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
         x1: x1 / w,
         y1: y1 / h,
         color: color,
-        room: room,
       });
     }
     setCleared(false);
@@ -162,9 +149,15 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
 
   return (
     <div className="wrapper">
-      <MetaTags>
-        <meta name="monetization" content={paymentPointer}></meta>
-      </MetaTags>
+      {isArtist ? (
+        <MetaTags>
+          <meta name="monetization" content={artistInfo.paymentPointer}></meta>
+        </MetaTags>
+      ) : (
+        <MetaTags>
+          <meta name="monetization" content={paymentPointer}></meta>
+        </MetaTags>
+      )}
 
       {isArtist || document.monetization.state === 'started' ? (
         <div>

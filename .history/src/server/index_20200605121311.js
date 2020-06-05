@@ -15,16 +15,23 @@ app.use(express.static('build'));
 // });
 
 io.on('connection', (socket) => {
+  socket.emit('messageFromServer', { data: 'welcome to the io server' });
   socket.on('join', (data) => {
     console.log(data);
     socket.join(data.room);
+    //socket.emit('joined', data);
+
     if (data.paymentPointer) {
-      io.in(data.room).emit('paymentPointer', data.paymentPointer);
+      io.in(data.room).broadcast.emit('paymentPointet', data.paymentPointer);
     }
+
+    // if (data.paymentPointer) {
+    //   socket.broadcast.emit('paymentPointer', data);
+    // }
   });
 
   socket.on('drawing', (data) => {
-    socket.in(data.room).broadcast.emit('drawingFromServer', data);
+    socket.broadcast.emit('drawingFromServer', data);
   });
 });
 

@@ -18,18 +18,15 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
 
   // socket.on('messageFromServer', (dataFromServer) => {
   //   console.log(dataFromServer, 'dataFromServer');
-  if (isArtist) {
-    socket.emit('join', {
-      room: room,
-      paymentPointer: artistInfo.paymentPointer,
-    });
-  } else {
-    socket.emit('join', { room: room });
-  }
 
-  socket.on('paymentPointer', (data) => {
+  socket.emit('join', {
+    room: room,
+    paymentPointer: artistInfo.paymentPointer,
+  });
+
+  socket.on('joined', (data) => {
     console.log(data);
-    setPaymentPointer(paymentPointer);
+    setPaymentPointer(data.paymentPointer);
   });
   //});
 
@@ -148,7 +145,6 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
         x1: x1 / w,
         y1: y1 / h,
         color: color,
-        room: room,
       });
     }
     setCleared(false);

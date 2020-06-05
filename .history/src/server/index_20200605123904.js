@@ -18,13 +18,11 @@ io.on('connection', (socket) => {
   socket.on('join', (data) => {
     console.log(data);
     socket.join(data.room);
-    if (data.paymentPointer) {
-      io.in(data.room).emit('paymentPointer', data.paymentPointer);
-    }
+    socket.emit('joined', data);
   });
 
   socket.on('drawing', (data) => {
-    socket.in(data.room).broadcast.emit('drawingFromServer', data);
+    socket.broadcast.emit('drawingFromServer', data);
   });
 });
 

@@ -15,27 +15,19 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   const [currentAxis, setCurrentAxis] = useState({ currentX: 0, currentY: 0 });
   const [paymentPointer, setPaymentPointer] = useState('');
   const [room] = useState('art');
+  if (artistInfo.paymentPointer) {
+    socket.on('messageFromServer', (dataFromServer) => {
+      console.log(dataFromServer, 'dataFromServer');
 
-  // socket.on('messageFromServer', (dataFromServer) => {
-  //   console.log(dataFromServer, 'dataFromServer');
-  if (isArtist) {
-    socket.emit('join', {
-      room: room,
-      paymentPointer: artistInfo.paymentPointer,
+      socket.emit('join', {
+        room: room,
+        paymentPointer: artistInfo.paymentPointer,
+      });
     });
-  } else {
-    socket.emit('join', { room: room });
   }
-
   socket.on('paymentPointer', (data) => {
-    console.log(data);
-    setPaymentPointer(paymentPointer);
+    console.log(data.paymentPointer, 'paymentPointer');
   });
-  //});
-
-  // socket.on('paymentPointer', (data) => {
-  //   console.log(data.paymentPointer, 'paymentPointer');
-  // });
 
   useEffect(() => {
     if (!canvasRef.current) {
@@ -148,7 +140,6 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
         x1: x1 / w,
         y1: y1 / h,
         color: color,
-        room: room,
       });
     }
     setCleared(false);
@@ -162,9 +153,15 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
 
   return (
     <div className="wrapper">
-      <MetaTags>
-        <meta name="monetization" content={paymentPointer}></meta>
-      </MetaTags>
+      {isArtist ? (
+        <MetaTags>
+          <meta name="monetization" content={artistInfo.paymentPointer}></meta>
+        </MetaTags>
+      ) : (
+        <MetaTags>
+          <meta name="monetization" content={paymentPointer}></meta>
+        </MetaTags>
+      )}
 
       {isArtist || document.monetization.state === 'started' ? (
         <div>

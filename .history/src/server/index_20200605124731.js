@@ -24,7 +24,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('drawing', (data) => {
-    socket.in(data.room).broadcast.emit('drawingFromServer', data);
+    socket.broadcast.emit('drawingFromServer', data);
   });
 });
 

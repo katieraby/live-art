@@ -15,16 +15,13 @@ app.use(express.static('build'));
 // });
 
 io.on('connection', (socket) => {
+  console.log(socket);
+  socket.emit('messageFromServer', { data: 'welcome to the io server' });
   socket.on('join', (data) => {
-    console.log(data);
-    socket.join(data.room);
-    if (data.paymentPointer) {
-      io.in(data.room).emit('paymentPointer', data.paymentPointer);
-    }
+    socket.broadcast.emit('paymentPointer', data);
   });
-
   socket.on('drawing', (data) => {
-    socket.in(data.room).broadcast.emit('drawingFromServer', data);
+    socket.broadcast.emit('drawingFromServer', data);
   });
 });
 
