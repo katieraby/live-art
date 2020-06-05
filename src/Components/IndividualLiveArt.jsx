@@ -30,9 +30,9 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     socket.emit("join", { room: room });
   }
 
-  socket.on("paymentPointer", (data) => {
-    console.log(data);
-    setPaymentPointer(data.paymentPointer);
+  socket.on("paymentPointer", (paymentPointer) => {
+    console.log(paymentPointer);
+    setPaymentPointer(paymentPointer);
   });
 
   useEffect(() => {
@@ -167,7 +167,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   return (
     <div className="wrapper">
       <MetaTags>
-        <meta name="monetization" content={paymentPointer}></meta>
+        <meta name="monetization" content={paymentPointer.toString()}></meta>
       </MetaTags>
 
       {isArtist || document.monetization.state === "started" ? (
