@@ -5,6 +5,7 @@ import styles from './Header.module.css';
 const Header = ({ isArtist }) => {
   return (
     <header className={styles.header}>
+      {' '}
       {!isArtist && (
         <div className={styles.logInText}>
           <button className={styles.artistLogInHereButton}>
