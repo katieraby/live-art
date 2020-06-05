@@ -1,0 +1,16 @@
+.viewArtButton {
+  background-color: #223127;
+  border: none;
+  border-radius: 10px;
+  padding: 1em;
+}
+
+.viewArtButtonLink {
+  text-decoration: none;
+  color: #fffffc;
+}
+
+.svg {
+  width: 200px;
+  height: 200px;
+}

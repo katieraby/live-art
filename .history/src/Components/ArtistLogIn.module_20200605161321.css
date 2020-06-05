@@ -1,0 +1,28 @@
+.artistLogInForm {
+  margin: 1em;
+  display: grid;
+  grid-template-areas:
+    'label label'
+    'username password'
+    'logInButton logInButton';
+}
+
+.artistLogInLabel {
+  margin: 1em
+  grid-area: label;
+}
+
+.artistLogInUsername {
+  grid-area: username;
+}
+
+.artistLogInPassword {
+  grid-area: password;
+}
+
+.artistLogInButton {
+  grid-area: logInButton;
+  margin-left: 500px;
+  margin-right: 500px;
+  margin-top: 1em;
+}

@@ -1,0 +1,38 @@
+.header {
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  background-color: #fffffc;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.headerText {
+  padding-top: 0.5em;
+  margin: 0;
+  font-size: 5em;
+}
+
+.headerTextLink {
+  text-decoration: none;
+  color: #bd4f6c;
+}
+.headerTextLink:hover {
+  color: #b0bea9;
+}
+
+.artistLogInHereButton {
+  background-color: #223127;
+  border: none;
+  border-radius: 10px;
+  padding-top: 1em;
+}
+
+.logInLink {
+  text-decoration: none;
+  color: #fffffc;
+}
+
+.logInLink:hover {
+  color: #b0bea9;
+}
