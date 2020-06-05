@@ -13,7 +13,6 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   const canvasRef = useRef(null);
   const [drawing, setDrawing] = useState(false);
   const [color, setColor] = useState('hotpink');
-  const [brushSize, setBrushSize] = useState(2);
   const [cleared, setCleared] = useState(false);
   const [currentAxis, setCurrentAxis] = useState({ currentX: 0, currentY: 0 });
   const [paymentPointer, setPaymentPointer] = useState('');
@@ -133,7 +132,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
       ctx.moveTo(x0, y0);
       ctx.lineTo(x1, y1);
       ctx.strokeStyle = color;
-      ctx.lineWidth = brushSize;
+      ctx.lineWidth = 2;
       ctx.stroke();
       ctx.closePath();
     }
@@ -163,12 +162,6 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     }
   };
 
-  const changeBrushSize = (size) => {
-    if (isArtist) {
-      setBrushSize(size);
-    }
-  };
-
   return (
     <div className="wrapper">
       <MetaTags>
@@ -181,7 +174,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
             className={styles.colorSelector}
             selectColor={selectColor}
           />
-          <BrushStrokeSlider changeBrushSize={changeBrushSize} />
+          <BrushStrokeSlider />
           <div className={styles.canvasContainer}>
             <canvas
               className={styles.canvas}

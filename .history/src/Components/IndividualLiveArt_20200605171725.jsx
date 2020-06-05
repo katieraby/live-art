@@ -181,7 +181,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
             className={styles.colorSelector}
             selectColor={selectColor}
           />
-          <BrushStrokeSlider changeBrushSize={changeBrushSize} />
+          <BrushStrokeSlider />
           <div className={styles.canvasContainer}>
             <canvas
               className={styles.canvas}

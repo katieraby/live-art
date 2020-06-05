@@ -13,7 +13,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   const canvasRef = useRef(null);
   const [drawing, setDrawing] = useState(false);
   const [color, setColor] = useState('hotpink');
-  const [brushSize, setBrushSize] = useState(2);
+  const [brushSize, setBrushSize] = useState(20);
   const [cleared, setCleared] = useState(false);
   const [currentAxis, setCurrentAxis] = useState({ currentX: 0, currentY: 0 });
   const [paymentPointer, setPaymentPointer] = useState('');

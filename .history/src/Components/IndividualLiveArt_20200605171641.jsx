@@ -163,12 +163,6 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     }
   };
 
-  const changeBrushSize = (size) => {
-    if (isArtist) {
-      setBrushSize(size);
-    }
-  };
-
   return (
     <div className="wrapper">
       <MetaTags>
@@ -181,7 +175,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
             className={styles.colorSelector}
             selectColor={selectColor}
           />
-          <BrushStrokeSlider changeBrushSize={changeBrushSize} />
+          <BrushStrokeSlider />
           <div className={styles.canvasContainer}>
             <canvas
               className={styles.canvas}
