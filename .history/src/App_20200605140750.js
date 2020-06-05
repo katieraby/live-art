@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './App.css';
 import { Router } from '@reach/router';
 import Header from './Components/Header';
 import ArtistLogIn from './Components/ArtistLogIn';
@@ -17,7 +18,7 @@ function App() {
   return (
     <div className={styles.App}>
       <Header isArtist={isArtist} />
-      <Router className={styles.mainContent}>
+      <Router className="main-content">
         <LiveArt path="/" />
 
         <ArtistLogIn

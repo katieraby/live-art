@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import './App.css';
 import { Router } from '@reach/router';
 import Header from './Components/Header';
 import ArtistLogIn from './Components/ArtistLogIn';
 import LiveArt from './Components/LiveArt';
 import IndividualLiveArt from './Components/IndividualLiveArt';
-import styles from './App.module.css';
+import styles from './App.css';
 
 function App() {
   const [artistInfo, setArtistInfo] = useState({
@@ -17,7 +18,7 @@ function App() {
   return (
     <div className={styles.App}>
       <Header isArtist={isArtist} />
-      <Router className={styles.mainContent}>
+      <Router className="main-content">
         <LiveArt path="/" />
 
         <ArtistLogIn

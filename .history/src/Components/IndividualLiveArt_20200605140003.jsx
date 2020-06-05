@@ -169,10 +169,6 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
 
       {isArtist || document.monetization.state === 'started' ? (
         <div className={styles.liveArtMain}>
-          <ColorSelector
-            className={styles.colorSelector}
-            selectColor={selectColor}
-          />
           <div className={styles.canvasContainer}>
             <canvas
               className={styles.canvas}
@@ -181,6 +177,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
               height={window.innerHeight}
             />
           </div>
+          <ColorSelector selectColor={selectColor} />
         </div>
       ) : (
         <div>

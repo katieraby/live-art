@@ -168,19 +168,14 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
       </MetaTags>
 
       {isArtist || document.monetization.state === 'started' ? (
-        <div className={styles.liveArtMain}>
-          <ColorSelector
-            className={styles.colorSelector}
-            selectColor={selectColor}
+        <div>
+          <canvas
+            className="canvas"
+            ref={canvasRef}
+            width={window.innerWidth}
+            height={window.innerHeight}
           />
-          <div className={styles.canvasContainer}>
-            <canvas
-              className={styles.canvas}
-              ref={canvasRef}
-              width={window.innerWidth}
-              height={window.innerHeight}
-            />
-          </div>
+          <ColorSelector selectColor={selectColor} />
         </div>
       ) : (
         <div>

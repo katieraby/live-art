@@ -15,7 +15,7 @@ const LiveArt = ({ username }) => {
       </button>
       <div className={styles.blobContainer}>
         <svg
-          className={styles.svgOne}
+          className={styles.svg}
           viewBox="0 0 200 200"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -26,7 +26,7 @@ const LiveArt = ({ username }) => {
           />
         </svg>
         <svg
-          className={styles.svgOne}
+          className={styles.svg}
           viewBox="0 0 200 200"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -36,19 +36,6 @@ const LiveArt = ({ username }) => {
             transform="translate(100 100)"
           />
         </svg>
-
-        <svg
-          className={styles.svg}
-          viewBox="0 0 200 200"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill="#223127"
-            d="M27.6,-8.1C35.5,15.2,41.3,40,32.1,47.5C22.9,55,-1.4,45.2,-23.3,29.8C-45.2,14.5,-64.7,-6.4,-60.4,-24.9C-56.1,-43.3,-28,-59.2,-9.1,-56.3C9.9,-53.3,19.8,-31.5,27.6,-8.1Z"
-            transform="translate(100 100)"
-          />
-        </svg>
-
         <svg
           className={styles.svg}
           viewBox="0 0 200 200"
@@ -62,17 +49,6 @@ const LiveArt = ({ username }) => {
         </svg>
         <svg
           className={styles.svg}
-          viewBox="0 0 200 200"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill="#BD4F6C"
-            d="M35.7,-46.3C50.7,-38.3,70.2,-33.7,67.6,-25.7C65.1,-17.8,40.3,-6.3,34.3,10.8C28.3,28,40.9,50.9,38.3,60.3C35.7,69.7,17.9,65.6,5.2,58.5C-7.5,51.4,-15,41.2,-22.3,33.3C-29.6,25.4,-36.7,19.8,-47.3,10C-57.9,0.2,-72,-13.9,-67.7,-20.4C-63.4,-26.9,-40.7,-25.9,-26.4,-34.1C-12,-42.4,-6,-60,2.2,-63C10.4,-66,20.7,-54.4,35.7,-46.3Z"
-            transform="translate(100 100)"
-          />
-        </svg>
-        <svg
-          className={styles.svgOne}
           viewBox="0 0 200 200"
           xmlns="http://www.w3.org/2000/svg"
         >

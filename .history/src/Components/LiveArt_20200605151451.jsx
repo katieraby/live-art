@@ -15,7 +15,7 @@ const LiveArt = ({ username }) => {
       </button>
       <div className={styles.blobContainer}>
         <svg
-          className={styles.svgOne}
+          className={styles.svg}
           viewBox="0 0 200 200"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -26,7 +26,7 @@ const LiveArt = ({ username }) => {
           />
         </svg>
         <svg
-          className={styles.svgOne}
+          className={styles.svg}
           viewBox="0 0 200 200"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -36,19 +36,6 @@ const LiveArt = ({ username }) => {
             transform="translate(100 100)"
           />
         </svg>
-
-        <svg
-          className={styles.svg}
-          viewBox="0 0 200 200"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill="#223127"
-            d="M27.6,-8.1C35.5,15.2,41.3,40,32.1,47.5C22.9,55,-1.4,45.2,-23.3,29.8C-45.2,14.5,-64.7,-6.4,-60.4,-24.9C-56.1,-43.3,-28,-59.2,-9.1,-56.3C9.9,-53.3,19.8,-31.5,27.6,-8.1Z"
-            transform="translate(100 100)"
-          />
-        </svg>
-
         <svg
           className={styles.svg}
           viewBox="0 0 200 200"
@@ -57,28 +44,6 @@ const LiveArt = ({ username }) => {
           <path
             fill="#B0BEA9"
             d="M32.2,-16C45.8,4.9,63.7,26,59,37.8C54.4,49.6,27.2,52.2,5.6,48.9C-15.9,45.6,-31.8,36.6,-38.5,23.6C-45.3,10.6,-42.9,-6.4,-34.9,-24.1C-27,-41.8,-13.5,-60.2,-2.1,-59C9.3,-57.8,18.6,-37,32.2,-16Z"
-            transform="translate(100 100)"
-          />
-        </svg>
-        <svg
-          className={styles.svg}
-          viewBox="0 0 200 200"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill="#BD4F6C"
-            d="M35.7,-46.3C50.7,-38.3,70.2,-33.7,67.6,-25.7C65.1,-17.8,40.3,-6.3,34.3,10.8C28.3,28,40.9,50.9,38.3,60.3C35.7,69.7,17.9,65.6,5.2,58.5C-7.5,51.4,-15,41.2,-22.3,33.3C-29.6,25.4,-36.7,19.8,-47.3,10C-57.9,0.2,-72,-13.9,-67.7,-20.4C-63.4,-26.9,-40.7,-25.9,-26.4,-34.1C-12,-42.4,-6,-60,2.2,-63C10.4,-66,20.7,-54.4,35.7,-46.3Z"
-            transform="translate(100 100)"
-          />
-        </svg>
-        <svg
-          className={styles.svgOne}
-          viewBox="0 0 200 200"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill="#223127"
-            d="M47.2,-48.2C54.9,-39.6,50.3,-19.8,52.1,1.8C53.9,23.4,62.1,46.9,54.5,54C46.9,61.1,23.4,51.9,5.7,46.2C-12.1,40.6,-24.2,38.4,-38.6,31.3C-53.1,24.2,-70,12.1,-71.1,-1.1C-72.3,-14.3,-57.6,-28.6,-43.1,-37.2C-28.6,-45.8,-14.3,-48.6,2.7,-51.4C19.8,-54.1,39.6,-56.8,47.2,-48.2Z"
             transform="translate(100 100)"
           />
         </svg>

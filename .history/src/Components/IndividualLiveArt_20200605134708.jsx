@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import ColorSelector from './ColorSelector';
 import MetaTags from 'react-meta-tags';
 import socketIOClient from 'socket.io-client';
-import styles from './IndividualLiveArt.module.css';
 
 const socket = socketIOClient('http://localhost:8080');
 
@@ -168,19 +167,14 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
       </MetaTags>
 
       {isArtist || document.monetization.state === 'started' ? (
-        <div className={styles.liveArtMain}>
-          <ColorSelector
-            className={styles.colorSelector}
-            selectColor={selectColor}
+        <div>
+          <canvas
+            className="canvas"
+            ref={canvasRef}
+            width={window.innerWidth}
+            height={window.innerHeight}
           />
-          <div className={styles.canvasContainer}>
-            <canvas
-              className={styles.canvas}
-              ref={canvasRef}
-              width={window.innerWidth}
-              height={window.innerHeight}
-            />
-          </div>
+          <ColorSelector selectColor={selectColor} />
         </div>
       ) : (
         <div>

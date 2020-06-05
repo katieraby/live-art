@@ -62,7 +62,7 @@ const LiveArt = ({ username }) => {
         </svg>
         <svg
           className={styles.svg}
-          viewBox="0 0 200 200"
+          viewBox="0 0 400 400"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
