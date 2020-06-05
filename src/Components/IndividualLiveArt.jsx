@@ -20,6 +20,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   const [currentAxis, setCurrentAxis] = useState({ currentX: 0, currentY: 0 });
   const [paymentPointer, setPaymentPointer] = useState("");
   const [room] = useState("art");
+  const [startedPayment, setStartedPayment] = useState(false);
 
   if (isArtist) {
     socket.emit("join", {
@@ -30,12 +31,13 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     socket.emit("join", { room: room });
   }
 
-  useEffect(() => {
-    socket.on("paymentPointer", (paymentPointer) => {
-      console.log(paymentPointer);
-      setPaymentPointer(paymentPointer);
-    });
+  socket.on("paymentPointer", (paymentPointer) => {
+    setPaymentPointer(paymentPointer);
   });
+
+  if (paymentPointer !== "") {
+    setStartedPayment(true);
+  }
 
   useEffect(() => {
     if (!canvasRef.current) {
@@ -172,7 +174,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
         <meta name="monetization" content={paymentPointer.toString()}></meta>
       </MetaTags>
 
-      {isArtist || document.monetization.state === "started" ? (
+      {isArtist || startedPayment ? (
         <div className={styles.liveArtMain}>
           <ColorSelector
             className={styles.colorSelector}
