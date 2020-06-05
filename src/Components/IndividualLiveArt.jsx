@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import ColorSelector from './ColorSelector';
-import BrushStrokeSlider from './BrushStrokeSlider';
-import MetaTags from 'react-meta-tags';
-import socketIOClient from 'socket.io-client';
-import styles from './IndividualLiveArt.module.css';
+import React, { useEffect, useRef, useState } from "react";
+import ColorSelector from "./ColorSelector";
+import BrushStrokeSlider from "./BrushStrokeSlider";
+import MetaTags from "react-meta-tags";
+import socketIOClient from "socket.io-client";
+import styles from "./IndividualLiveArt.module.css";
 
 const socket = socketIOClient(); //in production
 
@@ -14,25 +14,25 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
 
   const canvasRef = useRef(null);
   const [drawing, setDrawing] = useState(false);
-  const [color, setColor] = useState('hotpink');
+  const [color, setColor] = useState("hotpink");
   const [brushSize, setBrushSize] = useState(2);
   const [cleared, setCleared] = useState(false);
   const [currentAxis, setCurrentAxis] = useState({ currentX: 0, currentY: 0 });
-  const [paymentPointer, setPaymentPointer] = useState('');
-  const [room] = useState('art');
+  const [paymentPointer, setPaymentPointer] = useState("");
+  const [room] = useState("art");
 
   if (isArtist) {
-    socket.emit('join', {
+    socket.emit("join", {
       room: room,
       paymentPointer: artistInfo.paymentPointer,
     });
   } else {
-    socket.emit('join', { room: room });
+    socket.emit("join", { room: room });
   }
 
-  socket.on('paymentPointer', (data) => {
+  socket.on("paymentPointer", (data) => {
     console.log(data);
-    setPaymentPointer(paymentPointer);
+    setPaymentPointer(data.paymentPointer);
   });
 
   useEffect(() => {
@@ -40,9 +40,9 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
       return;
     }
     const canvas = canvasRef.current;
-    canvas.addEventListener('mousedown', onMouseDown);
+    canvas.addEventListener("mousedown", onMouseDown);
     return () => {
-      canvas.removeEventListener('mousedown', onMouseDown);
+      canvas.removeEventListener("mousedown", onMouseDown);
     };
   });
 
@@ -51,9 +51,9 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
       return;
     }
     const canvas = canvasRef.current;
-    canvas.addEventListener('mousemove', onMouseMove);
+    canvas.addEventListener("mousemove", onMouseMove);
     return () => {
-      canvas.removeEventListener('mousemove', onMouseMove);
+      canvas.removeEventListener("mousemove", onMouseMove);
     };
   });
 
@@ -62,13 +62,13 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
       return;
     }
     const canvas = canvasRef.current;
-    canvas.addEventListener('mouseup', onMouseUp);
+    canvas.addEventListener("mouseup", onMouseUp);
     return () => {
-      canvas.removeEventListener('mouseup', onMouseUp);
+      canvas.removeEventListener("mouseup", onMouseUp);
     };
   });
 
-  socket.on('drawingFromServer', (data) => {
+  socket.on("drawingFromServer", (data) => {
     let w = window.innerWidth;
     let h = window.innerHeight;
 
@@ -121,7 +121,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     }
 
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
 
     if (ctx) {
       ctx.beginPath();
@@ -140,7 +140,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     let w = window.innerWidth;
     let h = window.innerHeight;
     if (!isNaN(x0 / w)) {
-      socket.emit('drawing', {
+      socket.emit("drawing", {
         x0: x0 / w,
         y0: y0 / h,
         x1: x1 / w,
@@ -170,7 +170,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
         <meta name="monetization" content={paymentPointer}></meta>
       </MetaTags>
 
-      {isArtist || document.monetization.state === 'started' ? (
+      {isArtist || document.monetization.state === "started" ? (
         <div className={styles.liveArtMain}>
           <ColorSelector
             className={styles.colorSelector}
@@ -196,13 +196,13 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
           </h2>
 
           <h2>
-            Find out more and sign up with{' '}
-            {<a href="https://coil.com/">Coil</a>}, and download the{' '}
+            Find out more and sign up with{" "}
+            {<a href="https://coil.com/">Coil</a>}, and download the{" "}
             {
               <a href="https://chrome.google.com/webstore/detail/coil/locbifcbeldmnphbgkdigjmkbfkhbnca?hl=en">
                 Google Chrome browser extension
               </a>
-            }{' '}
+            }{" "}
             to support your local artist.
           </h2>
           <h2>
