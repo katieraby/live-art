@@ -16,7 +16,7 @@
 
 .blobContainer {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
@@ -26,6 +26,6 @@
 }
 
 .svgOne {
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
 }
