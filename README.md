@@ -2,25 +2,29 @@
 
 #### A web application using web monetization and socket.io to enable supporters to view live art and make micro payments to the artist.
 
-![Alt text](./screenshots/homepage.png 'homepage')
-
-Please visit the hosted site [here]
+![Alt text](./screenshots/homepage.png "homepage")
 
 If you are an artist you will need a payment pointer to enable micro payments to be made to your web wallet. Uphold offer a good service for this and you can sign up [here](https://uphold.com/en-gb/)
 
-![Alt text](./screenshots/artistlogin.png 'artist log in')
+![Alt text](./screenshots/artistlogin.png "artist log in")
 
-As a supporter you will need an coil account and the relevant extention for your web browser. All can be found [here](https://coil.com/)
+As a supporter you will need an coil account and the relevant extension for your web browser. All can be found [here](https://coil.com/)
 
-![Alt text](./screenshots/notmonetized.png 'not monetized message')
+![Alt text](./screenshots/notmonetized.png "not monetized message")
 
 Once logged in and the site is monetized, the artist will be able to draw on the canvas with the supporter able to view in real time.
 
-![Alt text](./screenshots/blankcanvas.png 'blank canvas')
+![Alt text](./screenshots/blankcanvas.png "blank canvas")
 
-![Alt text](./screenshots/badart.png 'badart')
+![Alt text](./screenshots/badart.png "badart")
+
+The supporter will be sending payments via their Coil browser extension as below.
+
+![Monetization in action](./screenshots/live-art-monetization.png "monetization in action")
 
 If you would like to view the backend API for this project please find the code [here](https://github.com/katieraby/live-art-backend).
+
+The hosted link to this project will be available post-bug-fixing.
 
 ### **Prerequisites**
 
