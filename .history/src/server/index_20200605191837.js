@@ -14,7 +14,7 @@ app.get('*', (req, res) => {
 
 io.on('connection', (socket) => {
   socket.on('join', (data) => {
-    console.log(data);
+    //console.log(data);
     socket.join(data.room);
     if (data.paymentPointer) {
       io.in(data.room).emit('paymentPointer', data.paymentPointer);

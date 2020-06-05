@@ -7,14 +7,14 @@ app.use(express.json());
 
 app.use(express.static('build'));
 
-const path = require('path');
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-});
+// const path = require("path");
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "build", "index.html"));
+// });
 
 io.on('connection', (socket) => {
   socket.on('join', (data) => {
-    console.log(data);
+    //console.log(data);
     socket.join(data.room);
     if (data.paymentPointer) {
       io.in(data.room).emit('paymentPointer', data.paymentPointer);
