@@ -2,6 +2,8 @@
 
 #### A web application using web monetization and socket.io to enable supporters to view live art and make micro payments to the artist.
 
+The hosted version of this project is available [here](https://live-art.herokuapp.com/).
+
 ![Alt text](./screenshots/homepage.png "homepage")
 
 If you are an artist you will need a payment pointer to enable micro payments to be made to your web wallet. Uphold offer a good service for this and you can sign up [here](https://uphold.com/en-gb/)
@@ -23,8 +25,6 @@ The supporter will be sending payments via their Coil browser extension as below
 ![Monetization in action](./screenshots/live-art-monetization.png "monetization in action")
 
 If you would like to view the backend API for this project please find the code [here](https://github.com/katieraby/live-art-backend).
-
-The hosted link to this project will be available post-bug-fixing.
 
 ### **Prerequisites**
 
