@@ -193,12 +193,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
           <BrushStrokeSlider changeBrushSize={changeBrushSize} />
 
           <div ref={canvasContainerRef} className={styles.canvasContainer}>
-            <canvas
-              className={styles.canvas}
-              ref={canvasRef}
-              width={canvasContainerRef.current.clientWidth}
-              height={canvasContainerRef.current.clientHeight}
-            />
+            <canvas className={styles.canvas} ref={canvasRef} />
           </div>
         </div>
       ) : (
