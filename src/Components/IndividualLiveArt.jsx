@@ -14,6 +14,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   /*need to use ref as canvas behaves differently in the dom. most dom elements have a value property that you can update directly whereas canvas has a context, which allows us to draw things.  */
 
   const canvasRef = useRef(null);
+  const canvasContainerRef = useRef(styles.canvasContainer);
   const [drawing, setDrawing] = useState(false);
   const [color, setColor] = useState("hotpink");
   const [brushSize, setBrushSize] = useState(2);
@@ -32,9 +33,13 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     socket.emit("join", { room: room });
   }
 
-  socket.on("paymentPointer", (paymentPointer) => {
-    setPaymentPointer(paymentPointer);
-  });
+  useEffect(() => {
+    if (paymentPointer !== "") {
+      socket.on("paymentPointer", (paymentPointer) => {
+        setPaymentPointer(paymentPointer);
+      });
+    }
+  }, [paymentPointer]);
 
   useEffect(() => {
     if (paymentPointer !== "") {
@@ -76,8 +81,8 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   });
 
   socket.on("drawingFromServer", (data) => {
-    let w = window.innerWidth;
-    let h = window.innerHeight;
+    let w = canvasContainerRef.current.clientWidth;
+    let h = canvasContainerRef.current.clientHeight;
 
     if (!isNaN(data.x0 / w) && !isNaN(data.y0)) {
       draw(
@@ -144,8 +149,8 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
       return;
     }
 
-    let w = window.innerWidth;
-    let h = window.innerHeight;
+    let w = canvasContainerRef.current.clientWidth;
+    let h = canvasContainerRef.current.clientHeight;
     if (!isNaN(x0 / w)) {
       socket.emit("drawing", {
         x0: x0 / w,
@@ -186,12 +191,12 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
 
           <BrushStrokeSlider changeBrushSize={changeBrushSize} />
 
-          <div className={styles.canvasContainer}>
+          <div ref={canvasContainerRef} className={styles.canvasContainer}>
             <canvas
               className={styles.canvas}
               ref={canvasRef}
-              width={window.innerWidth}
-              height={window.innerHeight}
+              width={canvasContainerRef.current.clientWidth}
+              height={canvasContainerRef.current.clientHeight}
             />
           </div>
         </div>
