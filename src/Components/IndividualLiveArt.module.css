@@ -8,6 +8,10 @@
   margin: 1em;
 }
 
+.canvas {
+  position: relative;
+}
+
 .liveArtMain {
   display: flex;
   flex-direction: column;

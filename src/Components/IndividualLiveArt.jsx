@@ -34,7 +34,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   }
 
   useEffect(() => {
-    if (paymentPointer !== "") {
+    if (paymentPointer === "") {
       socket.on("paymentPointer", (paymentPointer) => {
         setPaymentPointer(paymentPointer);
       });
@@ -134,11 +134,12 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
+    let rect = canvas.getBoundingClientRect();
 
     if (ctx) {
       ctx.beginPath();
-      ctx.moveTo(x0, y0);
-      ctx.lineTo(x1, y1);
+      ctx.moveTo(x0 - rect.left, y0 - rect.top);
+      ctx.lineTo(x1 - rect.left, y1 - rect.top);
       ctx.strokeStyle = color;
       ctx.lineWidth = brushSize;
       ctx.stroke();
