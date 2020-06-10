@@ -23,6 +23,12 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   const [paymentPointer, setPaymentPointer] = useState("");
   const [room] = useState("art");
   const [startedPayment, setStartedPayment] = useState(false);
+  const [canvasWidth, setCanvasWidth] = useState(
+    canvasContainerRef.current.clientWidth
+  );
+  const [canvasHeight, setCanvasHeight] = useState(
+    canvasContainerRef.current.clientHeight
+  );
 
   if (isArtist) {
     socket.emit("join", {
@@ -80,20 +86,29 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     };
   });
 
-  socket.on("drawingFromServer", (data) => {
-    let w = canvasContainerRef.current.clientWidth;
-    let h = canvasContainerRef.current.clientHeight;
-    console.log(w, h);
+  useEffect(() => {
+    socket.on("drawingFromServer", (data) => {
+      let w = canvasContainerRef.current.clientWidth;
+      let h = canvasContainerRef.current.clientHeight;
 
-    if (!isNaN(data.x0 / w) && !isNaN(data.y0)) {
-      draw(
-        Math.floor(data.x0 * w),
-        Math.floor(data.y0 * h),
-        Math.floor(data.x1 * w),
-        Math.floor(data.y1 * h),
-        data.color
-      );
-    }
+      if (canvasWidth !== w) {
+        setCanvasWidth(w);
+      }
+
+      if (canvasHeight !== h) {
+        setCanvasHeight(h);
+      }
+
+      if (!isNaN(data.x0 / w) && !isNaN(data.y0)) {
+        draw(
+          Math.floor(data.x0 * w),
+          Math.floor(data.y0 * h),
+          Math.floor(data.x1 * w),
+          Math.floor(data.y1 * h),
+          data.color
+        );
+      }
+    });
   });
 
   const onMouseDown = (e) => {
@@ -197,8 +212,8 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
             <canvas
               className={styles.canvas}
               ref={canvasRef}
-              width={`${canvasContainerRef.current.clientWidth}px`}
-              height={`${canvasContainerRef.current.clientHeight}px`}
+              width={`${canvasWidth}px`}
+              height={`${canvasHeight}px`}
             />
           </div>
         </div>
