@@ -1,15 +1,11 @@
 .canvasContainer {
   border-style: solid;
   border-color: #223127;
-  border-width: 1;
+  border-width: 5px;
   border-radius: 10px;
   height: 65vh;
   width: 80vw;
   margin: 1em;
-}
-
-.canvas {
-  position: relative;
 }
 
 .liveArtMain {
