@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
-import ArtistSignUp from './ArtistSignUp';
-import { navigate } from '@reach/router';
-import axios from 'axios';
-import styles from './ArtistLogIn.module.css';
+import React, { useState } from "react";
+import ArtistSignUp from "./ArtistSignUp";
+import { navigate } from "@reach/router";
+import axios from "axios";
+import styles from "./ArtistLogIn.module.css";
 
 const ArtistLogIn = ({ setArtistInfo, setIsArtist }) => {
   const [hasAccount, setHasAccount] = useState(true);
   const [logInDetails, setLogInDetails] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(logInDetails, 'apirequest');
     //api get request to check artist exists and provide username to link below
     //if ok set log in details, navigate to individual artist page
     //add artist to context array of artists
@@ -23,15 +22,14 @@ const ArtistLogIn = ({ setArtistInfo, setIsArtist }) => {
         logInDetails
       )
       .then(({ data }) => {
-        console.log(data);
         setArtistInfo({
           username: data.username,
           bio: data.aboutMe,
           paymentPointer: data.paymentPointer,
         });
         setIsArtist(true);
-        navigate('/art');
-        setLogInDetails({ username: '', password: '' });
+        navigate("/art");
+        setLogInDetails({ username: "", password: "" });
       })
       .catch((err) => {
         console.dir(err);
