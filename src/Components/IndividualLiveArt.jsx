@@ -83,6 +83,8 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   socket.on("drawingFromServer", (data) => {
     let w = canvasContainerRef.current.clientWidth;
     let h = canvasContainerRef.current.clientHeight;
+    console.log(w);
+    console.log(h);
 
     if (!isNaN(data.x0 / w) && !isNaN(data.y0)) {
       draw(
@@ -193,7 +195,12 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
           <BrushStrokeSlider changeBrushSize={changeBrushSize} />
 
           <div ref={canvasContainerRef} className={styles.canvasContainer}>
-            <canvas className={styles.canvas} ref={canvasRef} />
+            <canvas
+              className={styles.canvas}
+              ref={canvasRef}
+              width={canvasContainerRef.current.clientWidth}
+              height={canvasContainerRef.current.clientHeight}
+            />
           </div>
         </div>
       ) : (
