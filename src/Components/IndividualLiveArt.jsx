@@ -197,11 +197,9 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
             <canvas
               className={styles.canvas}
               ref={canvasRef}
-              width={canvasContainerRef.current.clientWidth}
-              height={canvasContainerRef.current.clientHeight}
+              width={`${canvasContainerRef.current.clientWidth}px`}
+              height={`${canvasContainerRef.current.clientHeight}px`}
             />
-            {console.log(canvasContainerRef.current.clientWidth)}
-            {console.log(canvasContainerRef.current.clientHeight)}
           </div>
         </div>
       ) : (
