@@ -81,8 +81,8 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   });
 
   socket.on("drawingFromServer", (data) => {
-    let w = canvasRef.current.clientWidth;
-    let h = canvasRef.current.clientHeight;
+    let w = canvasContainerRef.current.clientWidth;
+    let h = canvasContainerRef.current.clientHeight;
     console.log(w, h);
 
     if (!isNaN(data.x0 / w) && !isNaN(data.y0)) {
@@ -151,8 +151,8 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
       return;
     }
 
-    let w = canvasRef.current.clientWidth;
-    let h = canvasRef.current.clientHeight;
+    let w = canvasContainerRef.current.clientWidth;
+    let h = canvasContainerRef.current.clientHeight;
     if (!isNaN(x0 / w)) {
       socket.emit("drawing", {
         x0: x0 / w,
@@ -200,6 +200,8 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
               width={canvasContainerRef.current.clientWidth}
               height={canvasContainerRef.current.clientHeight}
             />
+            {console.log(canvasContainerRef.current.clientWidth)}
+            {console.log(canvasContainerRef.current.clientHeight)}
           </div>
         </div>
       ) : (
