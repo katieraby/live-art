@@ -22,7 +22,7 @@ Once logged in and the site is monetized, the artist will be able to draw on the
 
 The supporter will be sending payments via their Coil browser extension as below.
 
-![Monetization in action](./screenshots/live-art-monetization.png "monetization in action")
+![Monetization in action](./screenshots/monetized-screenshot-2.png "monetization in action")
 
 If you would like to view the backend API for this project please find the code [here](https://github.com/katieraby/live-art-backend).
 
