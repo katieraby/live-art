@@ -91,6 +91,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     let h = canvasContainerRef.current.clientHeight;
 
     if (canvasWidth !== w) {
+      console.log("canvas width is not width");
       setCanvasWidth(w);
     }
 
@@ -210,8 +211,16 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
             <canvas
               className={styles.canvas}
               ref={canvasRef}
-              width={canvasWidth}
-              height={canvasHeight}
+              width={
+                canvasWidth
+                  ? canvasWidth
+                  : canvasContainerRef.current.clientWidth
+              }
+              height={
+                canvasHeight
+                  ? canvasHeight
+                  : canvasContainerRef.current.clientHeight
+              }
             />
           </div>
         </div>
