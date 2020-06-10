@@ -1,4 +1,11 @@
 .slider {
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin: 1em;
+}
+
+.sliderContainer {
+  margin-top: 1.5em;
+  display: grid;
+  grid-template-columns: 1fr 6fr 1fr;
+  align-items: center;
+  justify-items: center;
 }
