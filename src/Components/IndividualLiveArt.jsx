@@ -5,9 +5,9 @@ import MetaTags from "react-meta-tags";
 import socketIOClient from "socket.io-client";
 import styles from "./IndividualLiveArt.module.css";
 
-// const socket = socketIOClient(); //in production
+const socket = socketIOClient(); //in production
 
-const socket = socketIOClient("http://localhost:8080");
+// const socket = socketIOClient("http://localhost:8080");
 // ---> in development
 
 const IndividualLiveArt = ({ artistInfo, isArtist }) => {
