@@ -193,6 +193,12 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     }
   };
 
+  const clearCanvas = (e) => {
+    if (isArtist) {
+      setCleared(true);
+    }
+  };
+
   return (
     <div className="wrapper">
       <MetaTags>
@@ -208,7 +214,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
 
           <BrushStrokeSlider changeBrushSize={changeBrushSize} />
           <button onClick={() => selectColor('#fffffc')}>Eraser</button>
-          {/* <button onClick={clearCanvas}>Clear Canvas</button> */}
+          <button onClick={clearCanvas}>Clear Canvas</button>
           <div ref={canvasContainerRef} className={styles.canvasContainer}>
             <canvas
               className={styles.canvas}
