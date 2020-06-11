@@ -29,11 +29,15 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   const [canvasHeight, setCanvasHeight] = useState(
     canvasContainerRef.current.clientHeight
   );
+  const [username, setUsername] = useState("");
+  const [bio, setBio] = useState("");
 
   if (isArtist) {
     socket.emit("join", {
       room: room,
       paymentPointer: artistInfo.paymentPointer,
+      username: artistInfo.username,
+      bio: artistInfo.bio,
     });
   } else {
     socket.emit("join", { room: room });
@@ -41,8 +45,10 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
 
   useEffect(() => {
     if (paymentPointer === "") {
-      socket.on("paymentPointer", (paymentPointer) => {
-        setPaymentPointer(paymentPointer);
+      socket.on("paymentPointer", (data) => {
+        setPaymentPointer(data.paymentPointer);
+        setUsername(data.username);
+        setBio(data.bio);
       });
     }
   }, [paymentPointer]);
@@ -230,6 +236,8 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
 
       {isArtist || startedPayment ? (
         <div className={styles.liveArtMain}>
+          <h2>{username}</h2>
+          <p>{bio}</p>
           <ColorSelector
             className={styles.colorSelector}
             selectColor={selectColor}

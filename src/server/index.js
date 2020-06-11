@@ -1,32 +1,36 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
 
 app.use(express.json());
 
-app.use(express.static('build'));
+app.use(express.static("build"));
 
-const path = require('path');
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+const path = require("path");
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "build", "index.html"));
 });
 
-io.on('connection', (socket) => {
-  socket.on('join', (data) => {
+io.on("connection", (socket) => {
+  socket.on("join", (data) => {
     socket.join(data.room);
     if (data.paymentPointer) {
-      io.in(data.room).emit('paymentPointer', data.paymentPointer);
+      io.in(data.room).emit("paymentPointer", {
+        paymentPointer: data.paymentPointer,
+        username: data.username,
+        bio: data.bio,
+      });
     }
   });
 
-  socket.on('drawing', (data) => {
-    socket.in(data.room).broadcast.emit('drawingFromServer', data);
+  socket.on("drawing", (data) => {
+    socket.in(data.room).broadcast.emit("drawingFromServer", data);
   });
 
-  socket.on('clear', (data) => {
+  socket.on("clear", (data) => {
     console.log(data);
-    socket.in(data.room).emit('clearCanvas');
+    socket.in(data.room).emit("clearCanvas");
   });
 });
 
