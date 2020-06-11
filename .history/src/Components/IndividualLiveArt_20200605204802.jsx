@@ -5,16 +5,14 @@ import MetaTags from 'react-meta-tags';
 import socketIOClient from 'socket.io-client';
 import styles from './IndividualLiveArt.module.css';
 
-// const socket = socketIOClient(); //in production
+const socket = socketIOClient(); //in production
 
-const socket = socketIOClient('http://localhost:8080');
-// ---> in development
+//const socket = socketIOClient("http://your-local-ip:8080") ---> in development
 
 const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   /*need to use ref as canvas behaves differently in the dom. most dom elements have a value property that you can update directly whereas canvas has a context, which allows us to draw things.  */
 
   const canvasRef = useRef(null);
-  const canvasContainerRef = useRef(styles.canvasContainer);
   const [drawing, setDrawing] = useState(false);
   const [color, setColor] = useState('hotpink');
   const [brushSize, setBrushSize] = useState(2);
@@ -22,13 +20,6 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   const [currentAxis, setCurrentAxis] = useState({ currentX: 0, currentY: 0 });
   const [paymentPointer, setPaymentPointer] = useState('');
   const [room] = useState('art');
-  const [startedPayment, setStartedPayment] = useState(false);
-  const [canvasWidth, setCanvasWidth] = useState(
-    canvasContainerRef.current.clientWidth
-  );
-  const [canvasHeight, setCanvasHeight] = useState(
-    canvasContainerRef.current.clientHeight
-  );
 
   if (isArtist) {
     socket.emit('join', {
@@ -39,19 +30,10 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     socket.emit('join', { room: room });
   }
 
-  useEffect(() => {
-    if (paymentPointer === '') {
-      socket.on('paymentPointer', (paymentPointer) => {
-        setPaymentPointer(paymentPointer);
-      });
-    }
-  }, [paymentPointer]);
-
-  useEffect(() => {
-    if (paymentPointer !== '') {
-      setStartedPayment(true);
-    }
-  }, [paymentPointer]);
+  socket.on('paymentPointer', (data) => {
+    console.log(data);
+    setPaymentPointer(data.paymentPointer);
+  });
 
   useEffect(() => {
     if (!canvasRef.current) {
@@ -87,16 +69,8 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   });
 
   socket.on('drawingFromServer', (data) => {
-    let w = canvasContainerRef.current.clientWidth;
-    let h = canvasContainerRef.current.clientHeight;
-
-    if (canvasWidth !== w) {
-      setCanvasWidth(w);
-    }
-
-    if (canvasHeight !== h) {
-      setCanvasHeight(h);
-    }
+    let w = window.innerWidth;
+    let h = window.innerHeight;
 
     if (!isNaN(data.x0 / w) && !isNaN(data.y0)) {
       draw(
@@ -148,16 +122,13 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    let rect = canvas.getBoundingClientRect();
 
     if (ctx) {
       ctx.beginPath();
-      ctx.moveTo(x0 - rect.left, y0 - rect.top);
-      ctx.lineTo(x1 - rect.left, y1 - rect.top);
+      ctx.moveTo(x0, y0);
+      ctx.lineTo(x1, y1);
       ctx.strokeStyle = color;
       ctx.lineWidth = brushSize;
-      ctx.lineJoin = 'round';
-      ctx.lineCap = 'round';
       ctx.stroke();
       ctx.closePath();
     }
@@ -166,8 +137,8 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
       return;
     }
 
-    let w = canvasContainerRef.current.clientWidth;
-    let h = canvasContainerRef.current.clientHeight;
+    let w = window.innerWidth;
+    let h = window.innerHeight;
     if (!isNaN(x0 / w)) {
       socket.emit('drawing', {
         x0: x0 / w,
@@ -196,32 +167,22 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   return (
     <div className="wrapper">
       <MetaTags>
-        <meta name="monetization" content={paymentPointer.toString()}></meta>
+        <meta name="monetization" content={paymentPointer}></meta>
       </MetaTags>
 
-      {isArtist || startedPayment ? (
+      {isArtist || document.monetization.state === 'started' ? (
         <div className={styles.liveArtMain}>
           <ColorSelector
             className={styles.colorSelector}
             selectColor={selectColor}
           />
-
           <BrushStrokeSlider changeBrushSize={changeBrushSize} />
-
-          <div ref={canvasContainerRef} className={styles.canvasContainer}>
+          <div className={styles.canvasContainer}>
             <canvas
               className={styles.canvas}
               ref={canvasRef}
-              width={
-                canvasWidth
-                  ? canvasWidth
-                  : canvasContainerRef.current.clientWidth
-              }
-              height={
-                canvasHeight
-                  ? canvasHeight
-                  : canvasContainerRef.current.clientHeight
-              }
+              width={window.innerWidth}
+              height={window.innerHeight}
             />
           </div>
         </div>
