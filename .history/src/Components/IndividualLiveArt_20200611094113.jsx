@@ -109,17 +109,6 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
     }
   });
 
-  socket.on('clearCanvas', (data) => {
-    console.log('back in the canvas room');
-    if (canvasRef.current) {
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext('2d');
-
-      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-      setCleared(true);
-    }
-  });
-
   const onMouseDown = (e) => {
     if (isArtist) {
       setCurrentAxis({ currentX: e.clientX, currentY: e.clientY });
@@ -206,18 +195,6 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
 
   const clearCanvasClick = (e) => {
     if (isArtist) {
-      if (canvasRef.current) {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
-
-        ctx.clearRect(
-          0,
-          0,
-          canvasContainerRef.current.clientWidth,
-          canvasContainerRef.current.clientHeight
-        );
-        setCleared(true);
-      }
       socket.emit('clear', { room: room });
     }
   };

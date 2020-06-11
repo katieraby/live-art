@@ -115,7 +115,12 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
       const canvas = canvasRef.current;
       const ctx = canvas.getContext('2d');
 
-      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+      ctx.clearRect(
+        0,
+        0,
+        canvasContainerRef.current.clientWidth,
+        canvasContainerRef.current.clientHeight
+      );
       setCleared(true);
     }
   });
@@ -210,12 +215,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
 
-        ctx.clearRect(
-          0,
-          0,
-          canvasContainerRef.current.clientWidth,
-          canvasContainerRef.current.clientHeight
-        );
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
         setCleared(true);
       }
       socket.emit('clear', { room: room });

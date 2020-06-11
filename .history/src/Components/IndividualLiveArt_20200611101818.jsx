@@ -206,18 +206,6 @@ const IndividualLiveArt = ({ artistInfo, isArtist }) => {
 
   const clearCanvasClick = (e) => {
     if (isArtist) {
-      if (canvasRef.current) {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
-
-        ctx.clearRect(
-          0,
-          0,
-          canvasContainerRef.current.clientWidth,
-          canvasContainerRef.current.clientHeight
-        );
-        setCleared(true);
-      }
       socket.emit('clear', { room: room });
     }
   };
