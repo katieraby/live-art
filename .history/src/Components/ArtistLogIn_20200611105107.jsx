@@ -4,7 +4,7 @@ import { navigate } from '@reach/router';
 import axios from 'axios';
 import styles from './ArtistLogIn.module.css';
 
-const ArtistLogIn = ({ setArtistInfo, setIsArtist }) => {
+const ArtistLogIn = ({ setArtistInfo, setIsArtist, setArtistLoggedIn }) => {
   const [hasAccount, setHasAccount] = useState(true);
   const [logInDetails, setLogInDetails] = useState({
     username: '',
@@ -25,6 +25,7 @@ const ArtistLogIn = ({ setArtistInfo, setIsArtist }) => {
           paymentPointer: data.paymentPointer,
         });
         setIsArtist(true);
+        setArtistLoggedIn(true);
         navigate('/art');
         setLogInDetails({ username: '', password: '' });
       })

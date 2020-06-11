@@ -13,7 +13,9 @@ app.get('*', (req, res) => {
 });
 
 io.on('connection', (socket) => {
+  let room = '';
   socket.on('join', (data) => {
+    room = data.room;
     socket.join(data.room);
     if (data.paymentPointer) {
       io.in(data.room).emit('paymentPointer', {
@@ -30,6 +32,14 @@ io.on('connection', (socket) => {
 
   socket.on('clear', (data) => {
     socket.in(data.room).emit('clearCanvas');
+  });
+
+  socket.on('disconnect', () => {
+    console.log('disconnect in server');
+    io.in(room).emit('paymentPointerDisconnect', { paymentPointer: '' });
+  });
+  socket.on('disconnectedArtist', (data) => {
+    socket.in(room).emit.broadcast('disconnectArtist', data.paymentPointer);
   });
 });
 

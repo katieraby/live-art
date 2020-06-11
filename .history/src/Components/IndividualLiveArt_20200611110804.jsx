@@ -10,7 +10,7 @@ import styles from './IndividualLiveArt.module.css';
 const socket = socketIOClient('http://localhost:8080');
 // ---> in development
 
-const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
+const IndividualLiveArt = ({ artistInfo, isArtist }) => {
   /*need to use ref as canvas behaves differently in the dom. most dom elements have a value property that you can update directly whereas canvas has a context, which allows us to draw things.  */
 
   const canvasRef = useRef(null);

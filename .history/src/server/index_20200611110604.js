@@ -29,6 +29,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('clear', (data) => {
+    console.log(data);
     socket.in(data.room).emit('clearCanvas');
   });
 });

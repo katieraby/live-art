@@ -30,7 +30,6 @@ function App() {
           path="/art"
           artistInfo={artistInfo}
           isArtist={isArtist}
-          setIsArtist={setIsArtist}
           primary={false}
         />
       </Router>

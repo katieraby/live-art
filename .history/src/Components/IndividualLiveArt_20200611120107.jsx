@@ -54,6 +54,21 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
   }, [paymentPointer]);
 
   useEffect(() => {
+    if (isArtist) {
+      socket.on('paymentPointerDisconnect', (data) => {
+        console.log('disconnect in client');
+        setPaymentPointer(data.paymentPointer);
+        setIsArtist(false);
+      });
+      socket.emit('disconnectedArtist', { paymentPointer: '' });
+    } else {
+      socket.on('disconnectArtist', (paymentPointer) => {
+        setPaymentPointer(paymentPointer);
+      });
+    }
+  });
+
+  useEffect(() => {
     if (paymentPointer !== '') {
       setStartedPayment(true);
     }

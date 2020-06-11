@@ -46,12 +46,23 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
   useEffect(() => {
     if (paymentPointer === '') {
       socket.on('paymentPointer', (data) => {
+        console.log('payment pointer is empty');
         setPaymentPointer(data.paymentPointer);
         setUsername(data.username);
         setBio(data.bio);
       });
     }
   }, [paymentPointer]);
+
+  useEffect(() => {
+    if (isArtist) {
+      socket.on('paymentPointerDisconnect', (data) => {
+        console.log('disconnect in client');
+        setPaymentPointer(data.paymentPointer);
+        setIsArtist(false);
+      });
+    }
+  });
 
   useEffect(() => {
     if (paymentPointer !== '') {

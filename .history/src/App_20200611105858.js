@@ -16,21 +16,21 @@ function App() {
 
   return (
     <div className={styles.App}>
-      <Header className={styles.headerTop} isArtist={isArtist} />
+      <Header className={styles.headerTop} />
       <Router className={styles.mainContent}>
-        <LiveArt path="/" isArtist={isArtist} />
+        <LiveArt path="/" />
         <ArtistLogIn
           path="/artist-log-in"
           setArtistInfo={setArtistInfo}
           setIsArtist={setIsArtist}
           primary={false}
+          setArtistLoggedIn={setArtistLoggedIn}
         />
 
         <IndividualLiveArt
           path="/art"
           artistInfo={artistInfo}
           isArtist={isArtist}
-          setIsArtist={setIsArtist}
           primary={false}
         />
       </Router>

@@ -13,7 +13,10 @@ app.get('*', (req, res) => {
 });
 
 io.on('connection', (socket) => {
+  let room = '';
+
   socket.on('join', (data) => {
+    room = data.room;
     socket.join(data.room);
     if (data.paymentPointer) {
       io.in(data.room).emit('paymentPointer', {
@@ -31,7 +34,7 @@ io.on('connection', (socket) => {
   socket.on('clear', (data) => {
     socket.in(data.room).emit('clearCanvas');
   });
-});
+
 
 const PORT = process.env.PORT || 8080;
 

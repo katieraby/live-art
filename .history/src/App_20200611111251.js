@@ -18,7 +18,7 @@ function App() {
     <div className={styles.App}>
       <Header className={styles.headerTop} isArtist={isArtist} />
       <Router className={styles.mainContent}>
-        <LiveArt path="/" isArtist={isArtist} />
+        <LiveArt path="/" />
         <ArtistLogIn
           path="/artist-log-in"
           setArtistInfo={setArtistInfo}
@@ -30,7 +30,6 @@ function App() {
           path="/art"
           artistInfo={artistInfo}
           isArtist={isArtist}
-          setIsArtist={setIsArtist}
           primary={false}
         />
       </Router>
