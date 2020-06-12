@@ -8,6 +8,5 @@
   grid-template-columns: 1fr 6fr 1fr;
   align-items: center;
   justify-items: center;
-  margin-left: 2.5em;
-  grid-area: slider;
+  margin-left: 2em;
 }

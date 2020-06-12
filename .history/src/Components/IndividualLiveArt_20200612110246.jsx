@@ -242,14 +242,14 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
           />
           <div className={styles.buttons}>
             <button
-              className={styles.eraseButton}
+              className={styles.button}
               onClick={() => selectColor('#fffffc')}
             >
               Eraser
             </button>
             <BrushStrokeSlider changeBrushSize={changeBrushSize} />
 
-            <button className={styles.clearButton} onClick={clearCanvasClick}>
+            <button className={styles.button} onClick={clearCanvasClick}>
               Clear Canvas
             </button>
           </div>

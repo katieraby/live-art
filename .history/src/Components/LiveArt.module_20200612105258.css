@@ -3,8 +3,6 @@
   border: none;
   border-radius: 10px;
   padding: 1em;
-  margin: 1em;
-  color: #fffffc;
 }
 
 .viewArtButtonLink {
@@ -36,8 +34,8 @@
   border: none;
   border-radius: 10px;
   padding: 1em;
-  margin: 1em;
-  color: #fffffc;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .logInLink {
@@ -47,11 +45,4 @@
 
 .logInLink:hover {
   color: #b0bea9;
-}
-
-@media only screen and (min-width: 800px) {
-  .homepageButtons {
-    display: flex;
-    justify-content: center;
-  }
 }
