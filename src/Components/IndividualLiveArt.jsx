@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
-import ColorSelector from './ColorSelector';
-import BrushStrokeSlider from './BrushStrokeSlider';
-import MetaTags from 'react-meta-tags';
-import socketIOClient from 'socket.io-client';
-import styles from './IndividualLiveArt.module.css';
+import React, { useEffect, useRef, useState } from "react";
+import ColorSelector from "./ColorSelector";
+import BrushStrokeSlider from "./BrushStrokeSlider";
+import MetaTags from "react-meta-tags";
+import socketIOClient from "socket.io-client";
+import styles from "./IndividualLiveArt.module.css";
 
-//const socket = socketIOClient(); //in production
+const socket = socketIOClient(); //in production
 
-const socket = socketIOClient('http://localhost:8080');
+// const socket = socketIOClient('http://localhost:8080');
 // ---> in development
 
 const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
@@ -16,12 +16,12 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
   const canvasRef = useRef(null);
   const canvasContainerRef = useRef(styles.canvasContainer);
   const [drawing, setDrawing] = useState(false);
-  const [color, setColor] = useState('hotpink');
+  const [color, setColor] = useState("hotpink");
   const [brushSize, setBrushSize] = useState(2);
   const [cleared, setCleared] = useState(false);
   const [currentAxis, setCurrentAxis] = useState({ currentX: 0, currentY: 0 });
-  const [paymentPointer, setPaymentPointer] = useState('');
-  const [room] = useState('art');
+  const [paymentPointer, setPaymentPointer] = useState("");
+  const [room] = useState("art");
   const [startedPayment, setStartedPayment] = useState(false);
   const [canvasWidth, setCanvasWidth] = useState(
     canvasContainerRef.current.clientWidth
@@ -29,23 +29,23 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
   const [canvasHeight, setCanvasHeight] = useState(
     canvasContainerRef.current.clientHeight
   );
-  const [username, setUsername] = useState('');
-  const [bio, setBio] = useState('');
+  const [username, setUsername] = useState("");
+  const [bio, setBio] = useState("");
 
   if (isArtist) {
-    socket.emit('join', {
+    socket.emit("join", {
       room: room,
       paymentPointer: artistInfo.paymentPointer,
       username: artistInfo.username,
       bio: artistInfo.bio,
     });
   } else {
-    socket.emit('join', { room: room });
+    socket.emit("join", { room: room });
   }
 
   useEffect(() => {
-    if (paymentPointer === '') {
-      socket.on('paymentPointer', (data) => {
+    if (paymentPointer === "") {
+      socket.on("paymentPointer", (data) => {
         setPaymentPointer(data.paymentPointer);
         setUsername(data.username);
         setBio(data.bio);
@@ -54,7 +54,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
   }, [paymentPointer]);
 
   useEffect(() => {
-    if (paymentPointer !== '') {
+    if (paymentPointer !== "") {
       setStartedPayment(true);
     }
   }, [paymentPointer]);
@@ -64,9 +64,9 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
       return;
     }
     const canvas = canvasRef.current;
-    canvas.addEventListener('mousedown', onMouseDown);
+    canvas.addEventListener("mousedown", onMouseDown);
     return () => {
-      canvas.removeEventListener('mousedown', onMouseDown);
+      canvas.removeEventListener("mousedown", onMouseDown);
     };
   });
 
@@ -75,9 +75,9 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
       return;
     }
     const canvas = canvasRef.current;
-    canvas.addEventListener('mousemove', onMouseMove);
+    canvas.addEventListener("mousemove", onMouseMove);
     return () => {
-      canvas.removeEventListener('mousemove', onMouseMove);
+      canvas.removeEventListener("mousemove", onMouseMove);
     };
   });
 
@@ -86,13 +86,13 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
       return;
     }
     const canvas = canvasRef.current;
-    canvas.addEventListener('mouseup', onMouseUp);
+    canvas.addEventListener("mouseup", onMouseUp);
     return () => {
-      canvas.removeEventListener('mouseup', onMouseUp);
+      canvas.removeEventListener("mouseup", onMouseUp);
     };
   });
 
-  socket.on('drawingFromServer', (data) => {
+  socket.on("drawingFromServer", (data) => {
     let w = canvasContainerRef.current.clientWidth;
     let h = canvasContainerRef.current.clientHeight;
 
@@ -115,11 +115,11 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
     }
   });
 
-  socket.on('clearCanvas', (data) => {
-    console.log('back in the canvas room');
+  socket.on("clearCanvas", (data) => {
+    console.log("back in the canvas room");
     if (canvasRef.current) {
       const canvas = canvasRef.current;
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext("2d");
 
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
       setCleared(true);
@@ -164,7 +164,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
     }
 
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     let rect = canvas.getBoundingClientRect();
 
     if (ctx) {
@@ -173,8 +173,8 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
       ctx.lineTo(x1 - rect.left, y1 - rect.top);
       ctx.strokeStyle = color;
       ctx.lineWidth = brushSize;
-      ctx.lineJoin = 'round';
-      ctx.lineCap = 'round';
+      ctx.lineJoin = "round";
+      ctx.lineCap = "round";
       ctx.stroke();
       ctx.closePath();
     }
@@ -186,7 +186,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
     let w = canvasContainerRef.current.clientWidth;
     let h = canvasContainerRef.current.clientHeight;
     if (!isNaN(x0 / w)) {
-      socket.emit('drawing', {
+      socket.emit("drawing", {
         x0: x0 / w,
         y0: y0 / h,
         x1: x1 / w,
@@ -214,7 +214,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
     if (isArtist) {
       if (canvasRef.current) {
         const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext("2d");
 
         ctx.clearRect(
           0,
@@ -224,7 +224,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
         );
         setCleared(true);
       }
-      socket.emit('clear', { room: room });
+      socket.emit("clear", { room: room });
     }
   };
 
@@ -243,7 +243,7 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
           <div className={styles.buttons}>
             <button
               className={styles.eraseButton}
-              onClick={() => selectColor('#fffffc')}
+              onClick={() => selectColor("#fffffc")}
             >
               Eraser
             </button>
@@ -290,13 +290,13 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
           </h2>
 
           <h2>
-            Find out more and sign up with{' '}
-            {<a href="https://coil.com/">Coil</a>}, and download the{' '}
+            Find out more and sign up with{" "}
+            {<a href="https://coil.com/">Coil</a>}, and download the{" "}
             {
               <a href="https://chrome.google.com/webstore/detail/coil/locbifcbeldmnphbgkdigjmkbfkhbnca?hl=en">
                 Google Chrome browser extension
               </a>
-            }{' '}
+            }{" "}
             to support your local artist.
           </h2>
           <h2>
