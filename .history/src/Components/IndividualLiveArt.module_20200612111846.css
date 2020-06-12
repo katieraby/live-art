@@ -23,18 +23,10 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
 }
 
-@media only screen and (max-width: 800px) {
-  .buttons {
-    display: grid;
-    grid-template-areas:
-      'slider slider'
-      'erase clear';
-  }
-}
-
-.eraseButton {
+.button {
   background-color: #223127;
   border: none;
   border-radius: 10px;
@@ -43,19 +35,6 @@
   margin-left: 2em;
   margin-right: 2em;
   margin-top: 1.5em;
-  grid-area: erase;
-}
-
-.clearButton {
-  background-color: #223127;
-  border: none;
-  border-radius: 10px;
-  padding: 1em;
-  color: #fffffc;
-  margin-left: 2em;
-  margin-right: 2em;
-  margin-top: 1.5em;
-  grid-area: clear;
 }
 
 .button:hover {

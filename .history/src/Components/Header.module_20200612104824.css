@@ -25,3 +25,21 @@
 .headerTextLink:hover {
   color: #b0bea9;
 }
+
+.artistLogInHereButton {
+  background-color: #223127;
+  border: none;
+  border-radius: 10px;
+  padding: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.logInLink {
+  text-decoration: none;
+  color: #fffffc;
+}
+
+.logInLink:hover {
+  color: #b0bea9;
+}

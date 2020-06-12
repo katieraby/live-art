@@ -18,7 +18,7 @@ const LiveArt = ({ isArtist, setArtistInfo, setIsArtist }) => {
   return (
     <div className={styles.homepage}>
       {!isArtist ? (
-        <div className={styles.homepageButtons}>
+        <>
           <div className={styles.logInText}>
             <button className={styles.artistLogInHereButton}>
               <Link to="/artist-log-in" className={styles.logInLink}>
@@ -32,7 +32,7 @@ const LiveArt = ({ isArtist, setArtistInfo, setIsArtist }) => {
               View Live Art
             </Link>
           </button>
-        </div>
+        </>
       ) : (
         <button onClick={logOut} className={styles.artistLogInHereButton}>
           Artist Log Out

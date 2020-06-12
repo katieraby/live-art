@@ -23,9 +23,10 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 600px) {
   .buttons {
     display: grid;
     grid-template-areas:

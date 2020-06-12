@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from '@reach/router';
 import styles from './LiveArt.module.css';
 
 const LiveArt = ({ isArtist, setArtistInfo, setIsArtist }) => {
-  const [loggedOut, setLoggedOut] = useState(false);
-
   const logOut = (e) => {
     setArtistInfo({
       username: '',
@@ -12,13 +10,12 @@ const LiveArt = ({ isArtist, setArtistInfo, setIsArtist }) => {
       paymentPointer: '',
     });
     setIsArtist(false);
-    setLoggedOut(true);
   };
 
   return (
     <div className={styles.homepage}>
       {!isArtist ? (
-        <div className={styles.homepageButtons}>
+        <>
           <div className={styles.logInText}>
             <button className={styles.artistLogInHereButton}>
               <Link to="/artist-log-in" className={styles.logInLink}>
@@ -32,9 +29,9 @@ const LiveArt = ({ isArtist, setArtistInfo, setIsArtist }) => {
               View Live Art
             </Link>
           </button>
-        </div>
+        </>
       ) : (
-        <button onClick={logOut} className={styles.artistLogInHereButton}>
+        <button onclick={logOut} className={styles.artistLogInHereButton}>
           Artist Log Out
         </button>
       )}
@@ -75,6 +72,17 @@ const LiveArt = ({ isArtist, setArtistInfo, setIsArtist }) => {
           />
         </svg>
 
+        {/* <svg
+          className={styles.svg}
+          viewBox="0 0 200 200"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="#B0BEA9"
+            d="M32.2,-16C45.8,4.9,63.7,26,59,37.8C54.4,49.6,27.2,52.2,5.6,48.9C-15.9,45.6,-31.8,36.6,-38.5,23.6C-45.3,10.6,-42.9,-6.4,-34.9,-24.1C-27,-41.8,-13.5,-60.2,-2.1,-59C9.3,-57.8,18.6,-37,32.2,-16Z"
+            transform="translate(100 100)"
+          />
+        </svg> */}
         <svg
           className={styles.svg}
           viewBox="0 0 200 200"
