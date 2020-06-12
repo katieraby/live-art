@@ -21,7 +21,7 @@
 .buttons {
   width: 80vw;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -38,32 +38,4 @@
 
 .button:hover {
   color: #b0bea9;
-}
-
-.artistInfo {
-  display: flex;
-}
-
-.artistBio {
-  display: flex;
-}
-
-.tags {
-  color: #e86252;
-  font-size: 16px;
-  font-weight: bold;
-  margin-right: 1em;
-  margin-left: 3em;
-}
-
-.info {
-  color: #223127;
-  font-size: 16px;
-  margin-right: 3em;
-}
-
-.artistInfoContainer {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
 }

@@ -5,9 +5,9 @@ import MetaTags from 'react-meta-tags';
 import socketIOClient from 'socket.io-client';
 import styles from './IndividualLiveArt.module.css';
 
-const socket = socketIOClient(); //in production
+//const socket = socketIOClient(); //in production
 
-//const socket = socketIOClient('http://localhost:8080');
+const socket = socketIOClient('http://localhost:8080');
 // ---> in development
 
 const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
@@ -269,15 +269,13 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
               }
             />
           </div>
-          <div className={styles.artistInfoContainer}>
-            <div className={styles.artistInfo}>
-              <p className={styles.tags}>Artist: </p>
-              <p className={styles.info}> {username}</p>
-            </div>
-            <div className={styles.artistBio}>
-              <p className={styles.tags}>About {username}: </p>
-              <p className={styles.info}> {bio}</p>
-            </div>
+          <div className={styles.artistInfo}>
+            <p className={styles.tags}>Artist: </p>
+            <p className={styles.info}> {username}</p>
+          </div>
+          <div className={styles.artistBio}>
+            <p className={styles.tags}>About {username}: </p>
+            <p className={styles.info}> {bio}</p>
           </div>
         </div>
       ) : (

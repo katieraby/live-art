@@ -5,9 +5,9 @@ import MetaTags from 'react-meta-tags';
 import socketIOClient from 'socket.io-client';
 import styles from './IndividualLiveArt.module.css';
 
-const socket = socketIOClient(); //in production
+//const socket = socketIOClient(); //in production
 
-//const socket = socketIOClient('http://localhost:8080');
+const socket = socketIOClient('http://localhost:8080');
 // ---> in development
 
 const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
@@ -240,19 +240,10 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
             className={styles.colorSelector}
             selectColor={selectColor}
           />
-          <div className={styles.buttons}>
-            <button
-              className={styles.button}
-              onClick={() => selectColor('#fffffc')}
-            >
-              Eraser
-            </button>
-            <BrushStrokeSlider changeBrushSize={changeBrushSize} />
 
-            <button className={styles.button} onClick={clearCanvasClick}>
-              Clear Canvas
-            </button>
-          </div>
+          <BrushStrokeSlider changeBrushSize={changeBrushSize} />
+          <button onClick={() => selectColor('#fffffc')}>Eraser</button>
+          <button onClick={clearCanvasClick}>Clear Canvas</button>
           <div ref={canvasContainerRef} className={styles.canvasContainer}>
             <canvas
               className={styles.canvas}
@@ -269,16 +260,12 @@ const IndividualLiveArt = ({ artistInfo, isArtist, setIsArtist }) => {
               }
             />
           </div>
-          <div className={styles.artistInfoContainer}>
-            <div className={styles.artistInfo}>
-              <p className={styles.tags}>Artist: </p>
-              <p className={styles.info}> {username}</p>
-            </div>
-            <div className={styles.artistBio}>
-              <p className={styles.tags}>About {username}: </p>
-              <p className={styles.info}> {bio}</p>
-            </div>
-          </div>
+          <p>
+            Artist: <p>{username}</p>
+          </p>
+          <p>
+            About {username}: <p>{bio}</p>
+          </p>
         </div>
       ) : (
         <div>
